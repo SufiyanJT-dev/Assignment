@@ -425,6 +425,9 @@ D:\AssigmentSufiyan\HotelManagementProject\backend\HotelBookingSystem.Api\HotelB
 D:\AssigmentSufiyan\HotelManagementProject\backend\HotelBookingSystem.Api\HotelBookingSystem.Api\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 D:\AssigmentSufiyan\HotelManagementProject\backend\HotelBookingSystem.Api\HotelBookingSystem.Api\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 D:\AssigmentSufiyan\HotelManagementProject\backend\HotelBookingSystem.Api\HotelBookingSystem.Api\bin\Debug\net8.0\Mono.TextTemplating.dll
+D:\AssigmentSufiyan\HotelManagementProject\backend\HotelBookingSystem.Api\HotelBookingSystem.Api\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\AssigmentSufiyan\HotelManagementProject\backend\HotelBookingSystem.Api\HotelBookingSystem.Api\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+D:\AssigmentSufiyan\HotelManagementProject\backend\HotelBookingSystem.Api\HotelBookingSystem.Api\bin\Debug\net8.0\Razorpay.dll
 D:\AssigmentSufiyan\HotelManagementProject\backend\HotelBookingSystem.Api\HotelBookingSystem.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\AssigmentSufiyan\HotelManagementProject\backend\HotelBookingSystem.Api\HotelBookingSystem.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\AssigmentSufiyan\HotelManagementProject\backend\HotelBookingSystem.Api\HotelBookingSystem.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll

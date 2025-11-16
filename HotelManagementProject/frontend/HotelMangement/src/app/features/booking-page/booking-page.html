@@ -1,0 +1,22 @@
+<div class="booking-container">
+  <h2>Booking Summary</h2>
+
+  <div class="room-details">
+    <p><strong>Room Number:</strong> {{ bookedRoomDeatils.roomNumber }}</p>
+    <p><strong>Price per Night:</strong> ₹{{ bookedRoomDeatils.pricePerNight }}</p>
+    <p><strong>Check-In:</strong> {{ booking.checkInDate }}</p>
+    <p><strong>Check-Out:</strong> {{ booking.checkOutDate }}</p>
+    <p><strong>Nights:</strong> {{ booking.nights }}</p>
+  </div>
+
+  <div class="amount-details">
+    <p><strong>Subtotal:</strong> ₹{{ booking.totalAmount }}</p>
+    <p><strong>Tax (10%):</strong> ₹{{ booking.tax }}</p>
+    <hr />
+    <p class="grand-total"><strong>Grand Total:</strong> ₹{{ booking.grandTotal }}</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit(booking)">
+    <button type="submit" class="btn btn-primary">Pay ₹{{ booking.grandTotal }}</button>
+  </form>
+</div>

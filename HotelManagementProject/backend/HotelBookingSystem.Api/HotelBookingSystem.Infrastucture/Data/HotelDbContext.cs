@@ -14,7 +14,7 @@ namespace HotelBookingSystem.Infrastructure.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=HotelSystem;User Id=sa;Password=Sufiyan@123;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(@"server=DESKTOP-D5LISN2\SQLEXPRESS;database=newhotel;integrated security=True;TrustServerCertificate = True;");
 
         }
         public DbSet<Booking> Bookings { get; set; }

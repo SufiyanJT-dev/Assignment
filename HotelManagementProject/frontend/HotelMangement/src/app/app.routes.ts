@@ -10,6 +10,7 @@ import { Hotel } from './features/Admin/admin-dashboard/pages/hotel/hotel';
 import { Rooms } from './features/Admin/admin-dashboard/pages/rooms/rooms';
 import { RoomTypesComponent } from './features/Admin/admin-dashboard/pages/room-type/room-type';
 import { BookingComponent } from './features/Admin/admin-dashboard/pages/booking/booking';
+import { BookingPage } from './features/booking-page/booking-page';
 
 
 export const routes: Routes = [
@@ -17,7 +18,7 @@ export const routes: Routes = [
     { path: 'Home', component: HomePage },
     { path: 'login', component: LoginAuth },
     { path: 'result-page', component: SearchPage },
-
+    {path:'BookingDeatils',component:BookingPage},
     { path: 'HotelDetails', component: Hoteldetails },
     {
         path: 'Admin-DashBoard',

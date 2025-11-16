@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj": {}
+    "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj": {
+    "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj",
+        "projectUniqueName": "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj",
         "projectName": "HotelBookingSystem.Domain",
-        "projectPath": "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj",
-        "packagesPath": "C:\\Users\\sufiyan.jt\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\obj\\",
+        "projectPath": "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj",
+        "packagesPath": "C:\\Users\\sufiyan\\.nuget\\packages\\",
+        "outputPath": "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sufiyan.jt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sufiyan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -66,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

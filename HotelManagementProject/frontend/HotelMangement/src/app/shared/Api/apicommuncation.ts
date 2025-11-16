@@ -6,6 +6,9 @@ import { RoomType } from '../../features/Admin/admin-dashboard/pages/room-type/r
 import { BookingDetails } from '../../features/Admin/admin-dashboard/pages/booking/booking';
 import { RoomTypeForAddData } from '../../features/Admin/admin-dashboard/pages/room-type/Type/RoomType';
 import { EmployeeDetails } from '../../features/Admin/admin-dashboard/pages/employees/type/EmployeeDetails';
+import { PaymentOrderResponse } from "../../features/booking-page/type/PaymentOrderResponse";
+import { VerifyPaymentCommand } from "../../features/booking-page/type/VerifyPaymentCommand";
+import { InitiatePaymentCommand } from "../../features/booking-page/type/InitiatePaymentCommand";
 @Injectable({
   providedIn: 'root',
 })
@@ -59,6 +62,9 @@ GetAllRoomsByHotelId(HotelId: number): Observable<any> {
 getroomtypesbyId(id: number): Observable<any> {
     return this.http.get(`${this.api}RoomType/${id}`);
 }
+GetRoomById(id:number):Observable<any>{
+  return this.http.get(`${this.api}Room/${id}`)
+}
 getAllRoomType():Observable<any>{
    return this.http.get(`${this.api}RoomType`);
 }
@@ -85,7 +91,15 @@ UpdateRoomType(id:number,formData:RoomType):Observable<any>{
 }
 // GET all bookings
 
+// --- ADD NEW METHOD 1: INITIATE ---
+  initiatePayment(command: InitiatePaymentCommand): Observable<PaymentOrderResponse> {
+    return this.http.post<PaymentOrderResponse>(`${this.api}/payment/initiate`, command);
+  }
 
+  // --- ADD NEW METHOD 2: VERIFY ---
+  verifyPayment(command: VerifyPaymentCommand): Observable<any> {
+    return this.http.post<any>(`${this.api}/payment/verify`, command);
+  }
 // GET single booking by ID
 getBookingById(id: number): Observable<BookingDetails> {
   return this.http.get<BookingDetails>(`${this.baseUrl}/${id}`);

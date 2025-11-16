@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Navbar } from '../../../core/Layout/navbar/navbar';
 import { SerachServices } from '../../search-page/Shared/serach-services';
 import { FormValues } from '../../search-page/compounents/right-sidecomponent/type/FormValues';
@@ -44,7 +44,8 @@ export class Hoteldetails {
   constructor(
     private route: ActivatedRoute,
     private serachServices: SerachServices,
-    private api: Apicommuncation
+    private api: Apicommuncation,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -77,22 +78,24 @@ export class Hoteldetails {
   }
 
   // Booking action
-  bookRoom(room: Room): void {
-    const bookingPayload = {
-      roomId: room.id,
-      hotelId: room.hotelId,
-      checkInDate: this.searchData?.checkInDate,
-      checkOutDate: this.searchData?.checkOutDate,
-    };
+  bookRoom(roomid:number) {
+    // const bookingPayload = {
+    //   roomId: room.id,
+    //   hotelId: room.hotelId,
+    //   checkInDate: this.searchData?.checkInDate,
+    //   checkOutDate: this.searchData?.checkOutDate,
+    // };
 
-    this.api.bookRoom(bookingPayload).subscribe({
-      next: (res) => {
-        alert(`Room ${room.roomNumber} booked successfully!`);
-      },
-      error: (err) => {
-        alert(`Booking failed for Room ${room.roomNumber}`);
-      }
-    });
+    // this.api.bookRoom(bookingPayload).subscribe({
+    //   next: (res) => {
+    //     alert(`Room ${room.roomNumber} booked successfully!`);
+    //   },
+    //   error: (err) => {
+    //     alert(`Booking failed for Room ${room.roomNumber}`);
+    //   }
+    // });
+    
+    this.router.navigate(['/BookingDeatils'],{queryParams:{Roomid:roomid}})
   }
 }
 
