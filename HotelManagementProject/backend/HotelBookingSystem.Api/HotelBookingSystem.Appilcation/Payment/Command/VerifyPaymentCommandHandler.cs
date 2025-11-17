@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Razorpay.Api;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -71,30 +73,43 @@ namespace HotelBookingSystem.Application.Payment.Command
 
             // 7. Return result
             return isSignatureVerified
-                ? new OkObjectResult("Booking Confirmed!")
+                ? new OkObjectResult(new {message = "Booking Confirmed!" })
                 : new BadRequestObjectResult("Payment verification failed.");
         }
 
-        // Helper method for signature verification
+
         private bool VerifySignature(VerifyPaymentCommand request)
         {
             try
             {
                 var secret = _configuration["Razorpay:Secret"];
-                var attributes = new Dictionary<string, string>
-                {
-                    { "razorpay_order_id", request.RazorpayOrderId },
-                    { "razorpay_payment_id", request.RazorpayPaymentId },
-                    { "razorpay_signature", request.RazorpaySignature }
-                };
+                var payload = request.RazorpayOrderId + "|" + request.RazorpayPaymentId;
 
-                Razorpay.Api.Utils.verifyPaymentSignature(attributes);
-                return true;
+                var expectedSignature = CalculateSHA256Hash(payload, secret);
+
+                return expectedSignature == request.RazorpaySignature;
             }
-            catch
+            catch (Exception ex)
             {
+                // Log the error for debugging
+                Console.WriteLine("Signature verification failed: " + ex.Message);
                 return false;
             }
         }
+
+        private string CalculateSHA256Hash(string text, string secret)
+        {
+            var encoding = new UTF8Encoding();
+            byte[] keyByte = encoding.GetBytes(secret);
+            byte[] messageBytes = encoding.GetBytes(text);
+
+            using (var hmacsha256 = new HMACSHA256(keyByte))
+            {
+                byte[] hashmessage = hmacsha256.ComputeHash(messageBytes);
+                // Convert to hex string properly
+                return string.Concat(hashmessage.Select(b => b.ToString("x2")));
+            }
+        }
+
     }
 }

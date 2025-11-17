@@ -36,7 +36,7 @@ export class BookingPage implements OnInit { // <-- Add OnInit
   };
 
   booking = {
-    customerId: 1, // <-- TODO: Get this from your auth service (e.g., logged-in user)
+    customerId: 0, // <-- TODO: Get this from your auth service (e.g., logged-in user)
     roomId: 0,
     checkInDate: '',
     checkOutDate: '',
@@ -46,9 +46,18 @@ export class BookingPage implements OnInit { // <-- Add OnInit
     tax: 0,
     grandTotal: 0
   };
-
+storedUserID!:string;
+userId!:number;
   ngOnInit() {
+     this.storedUserID=localStorage.getItem('userId')||''
+  
+    if(this.storedUserID){
+      this.userId=Number(this.storedUserID);
+    }
+   
+   
     this.searchData = this.serachServices.getData();
+    this.booking.customerId=this.userId;
     this.booking.checkInDate = this.searchData.checkInDate;
     this.booking.checkOutDate = this.searchData.checkOutDate;
 
@@ -79,44 +88,43 @@ export class BookingPage implements OnInit { // <-- Add OnInit
       const tax = subtotal * 0.1; // 10% tax
       this.booking.totalAmount = subtotal;
       this.booking.tax = tax;
-      // We will use the grandTotal for payment
+      
       this.booking.grandTotal = subtotal + tax; 
     }
   }
 
-  // This replaces your old onSubmit
+  
   payNow() {
-    // 1. Validation
+   
     const inDate = new Date(this.booking.checkInDate);
     const outDate = new Date(this.booking.checkOutDate);
     if (outDate <= inDate) {
       alert('Check-out must be after check-in.');
       return;
     }
-    this.calculateTotals(); // Recalculate just in case
-
-    // 2. Create the command for our 'initiate' API
+    this.calculateTotals(); 
     const initiateCommand: InitiatePaymentCommand = {
-      customerId: this.booking.customerId, // <-- TODO: Get this from your auth service
+      customerId: this.booking.customerId, 
       roomId: this.booking.roomId,
       checkInDate: this.booking.checkInDate,
-      checkOutDate: this.booking.checkOutDate
+      checkOutDate: this.booking.checkOutDate,
+      totalAmount:this.booking.grandTotal
     };
 
-    // 3. Call the 'initiate' API
+  
     this.api.initiatePayment(initiateCommand).subscribe({
       next: (orderResponse) => {
-        // --- STEP 4: We got the Order ID, now open Razorpay ---
+       
         const options = {
-          key: 'rzp_test_YOUR_KEY_ID_HERE', // <-- Add your Razorpay Key ID
-          amount: orderResponse.amount * 100, // Amount is in paise
+          key: 'rzp_test_RgqCJspx1WbTCo', 
+          amount: orderResponse.amount * 100, 
           currency: 'INR',
           name: 'Hotel Booking System',
           description: `Booking for Room ${this.bookedRoomDeatils.roomNumber}`,
           order_id: orderResponse.razorpayOrderId,
-          
-          // --- STEP 5: This function is called on payment success ---
+       
           handler: (response: any) => {
+            console.log(response)
             const verifyCommand: VerifyPaymentCommand = {
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
@@ -124,20 +132,21 @@ export class BookingPage implements OnInit { // <-- Add OnInit
               bookingId: orderResponse.bookingId
             };
 
-            // --- STEP 6: Call our 'verify' API ---
+           console.log(verifyCommand)
             this.api.verifyPayment(verifyCommand).subscribe({
               next: (verifyResponse) => {
                 alert('Booking Confirmed!');
-                this.router.navigate(['/booking-success']); // Navigate to success page
+                this.router.navigate(['/HotelDetails']); 
               },
               error: (err) => {
                 alert('Payment verification failed. Please contact support.');
                 console.error(err);
+                console.log(err)
               }
             });
           },
           prefill: {
-            name: 'Customer Name', // TODO: Get from user profile
+            name: 'Customer Name', 
             email: 'customer.email@example.com',
           },
           theme: {
@@ -145,14 +154,15 @@ export class BookingPage implements OnInit { // <-- Add OnInit
           }
         };
         
-        // --- STEP 7: Create and open the Razorpay modal ---
         const rzp = new Razorpay(options);
         rzp.open();
       },
       error: (err) => {
         alert('Could not start payment. Please try again.');
-        console.error(err);
+        console.log(err,initiateCommand,initiateCommand);
+        
       }
+
     });
   }
   onSubmit(formValue: any) {

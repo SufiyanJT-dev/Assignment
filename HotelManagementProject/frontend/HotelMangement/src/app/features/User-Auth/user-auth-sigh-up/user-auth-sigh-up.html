@@ -1,0 +1,52 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Full Name</label>
+    <input type="text" formControlName="fullName" />
+    <div *ngIf="signupForm.get('fullName')?.invalid && signupForm.get('fullName')?.touched">
+      Full name is required (min 3 chars).
+    </div>
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input type="email" formControlName="email" />
+    <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+      Enter a valid email.
+    </div>
+  </div>
+
+  <div>
+    <label>Phone Number</label>
+    <input type="text" formControlName="phoneNumber" />
+    <div *ngIf="signupForm.get('phoneNumber')?.invalid && signupForm.get('phoneNumber')?.touched">
+      Must be a 10-digit number.
+    </div>
+  </div>
+
+  <div>
+    <label>ID Proof Number</label>
+    <input type="text" formControlName="idProofNumber" />
+    <div *ngIf="signupForm.get('idProofNumber')?.invalid && signupForm.get('idProofNumber')?.touched">
+      ID Proof is required.
+    </div>
+  </div>
+
+  <div>
+    <label>Password</label>
+    <input type="password" formControlName="password" />
+    <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+      Password must be at least 6 characters.
+    </div>
+  </div>
+
+  <div>
+    <label>Confirm Password</label>
+    <input type="password" formControlName="confirmPassword" />
+    <div *ngIf="signupForm.errors?.['mismatch'] && signupForm.get('confirmPassword')?.touched">
+      Passwords do not match.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+  <p style="margin-top: 3%;">Already Have a Account ? <a href="/login">Login</a></p>
+</form>

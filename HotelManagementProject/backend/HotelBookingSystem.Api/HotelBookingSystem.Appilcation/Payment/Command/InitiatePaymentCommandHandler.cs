@@ -35,19 +35,19 @@ namespace HotelBookingSystem.Appilcation.Payment.Command
                     CheckInDate = request.CheckInDate,
                     CheckOutDate = request.CheckOutDate,
                     Status = BookingStatus.Pending,
-                    TotalAmount = calculatedAmount
+                    TotalAmount = request.TotalAmount
                 };
                 _context.Bookings.Add(booking);
                 await _context.SaveChangesAsync(cancellationToken);
 
-                // 3. Create Razorpay Order
+               
                 var key = _configuration["Razorpay:Key"];
                 var secret = _configuration["Razorpay:Secret"];
                 RazorpayClient client = new RazorpayClient(key, secret);
 
                 var options = new Dictionary<string, object>
                 {
-                    { "amount", (int)(booking.TotalAmount * 100) }, // Amount in paise
+                    { "amount", (int)(booking.TotalAmount*100 ) }, 
                     { "currency", "INR" },
                     { "receipt", $"booking_{booking.Id}" }
                 };
@@ -55,7 +55,7 @@ namespace HotelBookingSystem.Appilcation.Payment.Command
                 Order order = client.Order.Create(options);
                 string razorpayOrderId = order.Attributes["id"];
 
-                // 4. Send Order ID back to Angular
+               
                 var responseDto = new PaymentOrderResponseDto
                 {
                     RazorpayOrderId = razorpayOrderId,

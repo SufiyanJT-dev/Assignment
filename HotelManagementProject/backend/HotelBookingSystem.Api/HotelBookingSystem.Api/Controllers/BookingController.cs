@@ -1,4 +1,5 @@
 ﻿using HotelBookingSystem.Appilcation.Booking.Command;
+using HotelBookingSystem.Appilcation.Booking.Dtos;
 using HotelBookingSystem.Appilcation.Booking.Query;
 using HotelBookingSystem.Appilcation.Customer.Command;
 using HotelBookingSystem.Appilcation.Customer.Query;
@@ -66,6 +67,20 @@ namespace HotelBookingSystem.Api.Controllers
 
             return await mediator.Send(commad);
 
+        }
+        [HttpGet("RoomId{roomId}")]
+        public async Task<List<Domain.Entities.Booking>> GetBokinByRoomId(int roomId)
+        {
+            var query = new GetBookingByRoomIdQuery();
+            query.roomId = roomId;
+            return await mediator.Send(query);
+        }
+        [HttpGet("GetByCustomer{CustomerId}")]
+        public async Task<List<BookinDesplayDataDtos>> GetBookingDeatils(int CustomerId)
+        {
+            GetBookingDetailsByCustomerIdQuery query =new  GetBookingDetailsByCustomerIdQuery();
+            query.id = CustomerId;
+            return await mediator.Send(query);
         }
 
     }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -10,7 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBookingSystem.Appilcation.Employee.Query
+namespace HotelBookingSystem.Appilcation.Auth.Query
 {
     public class JwtTokenGenerator
     {
@@ -21,7 +22,7 @@ namespace HotelBookingSystem.Appilcation.Employee.Query
             _settings = settings.Value;
         }
 
-        public Task<string> GenerateToken( string email)
+        public Task<string> GenerateToken( string email,string role)
         {
             if (string.IsNullOrEmpty(_settings.Key))
                 throw new InvalidOperationException("JWT Key is missing from configuration.");
@@ -29,8 +30,8 @@ namespace HotelBookingSystem.Appilcation.Employee.Query
           
             var claims = new[] {
           
-            new Claim(JwtRegisteredClaimNames.Email, email)
-         
+            new Claim(JwtRegisteredClaimNames.Email, email),
+            new Claim(ClaimTypes.Role,role)
         };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));

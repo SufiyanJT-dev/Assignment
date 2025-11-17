@@ -3,4 +3,5 @@ export interface InitiatePaymentCommand {
   roomId: number;
   checkInDate: string;
   checkOutDate: string;
+  totalAmount: number;
 }

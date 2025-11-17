@@ -13,11 +13,25 @@ import { SearchFormData } from '../Type/SerachInterface';
   styleUrl: './banner.scss',
 })
 export class Banner {
+ 
   constructor(private router:Router ,private api:Apicommuncation){}
+  todaydate!: string;
+tomorrow!: string;
+
+ngOnInit() {
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+
+  // Format as yyyy-MM-dd for input[type="date"]
+  this.todaydate = today.toISOString().split('T')[0];
+  this.tomorrow = tomorrow.toISOString().split('T')[0];
+}
+
 onSearch(form: any) {
     const formValues: SearchFormData={
       location: form.value.location || '',
-    checkInDate: form.value.checkInDate || '',
+    checkInDate: form.value.checkInDate ||  new Date() ,
     checkOutDate: form.value.checkOutDate || '',
   };
     this.router.navigate(['/result-page'],{

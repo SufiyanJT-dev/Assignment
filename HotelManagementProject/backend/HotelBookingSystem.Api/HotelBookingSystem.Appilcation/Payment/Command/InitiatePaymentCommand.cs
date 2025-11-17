@@ -12,6 +12,6 @@ namespace HotelBookingSystem.Appilcation.Payment.Command
         public int RoomId { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
-        // Amount will be calculated on the server
+        public decimal TotalAmount { get; set; }
     }
 }

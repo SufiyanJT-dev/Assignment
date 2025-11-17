@@ -1,7 +1,9 @@
-﻿using HotelBookingSystem.Appilcation.Employee.Command;
+﻿using HotelBookingSystem.Appilcation.Auth.command;
+using HotelBookingSystem.Appilcation.Auth.Query;
+using HotelBookingSystem.Appilcation.Customer.Query;
+using HotelBookingSystem.Appilcation.Employee.Command;
 using HotelBookingSystem.Appilcation.Employee.Dtos;
 using HotelBookingSystem.Appilcation.Employee.Query;
-using HotelBookingSystem.Application.Employee.Command;
 using HotelBookingSystem.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -57,57 +59,7 @@ namespace HotelBookingSystem.Api.Controllers
             command.Id = id;
             return await mediator.Send(command);
         }
-        [HttpPost("validate-login")]
-
        
-        public async Task<IActionResult> ValidatingLogin([FromBody] validatePasswordQuery query)
-        {
-            var (accessToken, refreshToken) = await mediator.Send(query);
-
-            if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(refreshToken))
-            {
-                return Unauthorized("Invalid credentials.");
-            }
-
-            Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = false,
-                SameSite = SameSiteMode.Lax,
-                Path = "/",
-                Expires = DateTimeOffset.UtcNow.AddDays(7)
-            });
-
-            return Ok(new { accessToken,refreshToken  });
-        }
-
-        [HttpPost("refresh-token")]
-        public async Task<IActionResult> RefreshToken(RefreshTokenCommand command)
-        {
-            var refreshToken = command.RefreshToken;
-            if (string.IsNullOrEmpty(refreshToken))
-                return Unauthorized("Refresh token missing");
-
-            try
-            {
-                var (accessToken, newRefreshToken) = await mediator.Send(new RefreshTokenCommand { RefreshToken = refreshToken });
-
-                Response.Cookies.Append("refreshToken", newRefreshToken, new CookieOptions
-                {
-                    HttpOnly = true,
-                    Secure = false,
-                    SameSite = SameSiteMode.Lax,
-                    Path = "/",
-                    Expires = DateTimeOffset.UtcNow.AddDays(7)
-                });
-
-                return Ok(new { accessToken });
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
-        }
         //public async Task<IActionResult> Logout()
         //{
         //    Response.Cookies.Append("refreshToken", "", new CookieOptions
@@ -128,5 +80,6 @@ namespace HotelBookingSystem.Api.Controllers
             var employees = await mediator.Send(query);
             return Ok(employees);
         }
+     
     }
 }

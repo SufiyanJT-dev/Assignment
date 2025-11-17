@@ -40,7 +40,7 @@ export class Hoteldetails {
   rooms: Room[] = [];
   loading = false;
   error: string | null = null;
-
+  token:string=''
   constructor(
     private route: ActivatedRoute,
     private serachServices: SerachServices,
@@ -79,23 +79,14 @@ export class Hoteldetails {
 
   // Booking action
   bookRoom(roomid:number) {
-    // const bookingPayload = {
-    //   roomId: room.id,
-    //   hotelId: room.hotelId,
-    //   checkInDate: this.searchData?.checkInDate,
-    //   checkOutDate: this.searchData?.checkOutDate,
-    // };
-
-    // this.api.bookRoom(bookingPayload).subscribe({
-    //   next: (res) => {
-    //     alert(`Room ${room.roomNumber} booked successfully!`);
-    //   },
-    //   error: (err) => {
-    //     alert(`Booking failed for Room ${room.roomNumber}`);
-    //   }
-    // });
-    
+   
+   this.token=localStorage.getItem('JwtAssesToken') || ''; 
+   if(this.token){
     this.router.navigate(['/BookingDeatils'],{queryParams:{Roomid:roomid}})
+   }
+   else{
+     this.router.navigate(['/login'])
+   }
   }
 }
 

@@ -14,7 +14,7 @@ export class AdminDashboard {
 
   constructor(private router: Router, private api: Apicommuncation) { }
   ngOnInit() {
-    const storedToken = sessionStorage.getItem('JwtToken');
+    const storedToken = localStorage.getItem('JwtToken');
     if (storedToken == null) {
       this.router.navigate(['/login']);
     }

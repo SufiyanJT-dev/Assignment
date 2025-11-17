@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\HotelBookingSystem.Appilcation",
+    "\\HotelBookingSystem.Appilcation\\Payment",
+    "\\HotelBookingSystem.Appilcation\\Payment\\Command"
   ],
+  "SelectedNode": "\\HotelBookingSystem.Api.sln",
   "PreviewInSolutionExplorer": false
 }

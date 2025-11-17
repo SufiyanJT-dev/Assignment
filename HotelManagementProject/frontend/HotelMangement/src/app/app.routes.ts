@@ -11,14 +11,23 @@ import { Rooms } from './features/Admin/admin-dashboard/pages/rooms/rooms';
 import { RoomTypesComponent } from './features/Admin/admin-dashboard/pages/room-type/room-type';
 import { BookingComponent } from './features/Admin/admin-dashboard/pages/booking/booking';
 import { BookingPage } from './features/booking-page/booking-page';
+import { UserAuthLogin } from './features/User-Auth/user-auth-login/user-auth-login';
+import { UserAuthSignUp } from './features/User-Auth/user-auth-sigh-up/user-auth-sigh-up';
+import { Profile } from './features/profile/profile';
+import { Orders } from './features/orders/orders';
 
 
 export const routes: Routes = [
     { path: '', redirectTo: 'Home', pathMatch: 'full' },
     { path: 'Home', component: HomePage },
-    { path: 'login', component: LoginAuth },
+    { path: 'login', component: UserAuthLogin },
+    {path:'AdminLogin',component:LoginAuth},
+    {path:'SignUp',component:UserAuthSignUp},
     { path: 'result-page', component: SearchPage },
     {path:'BookingDeatils',component:BookingPage},
+    {path:'Profile',component:Profile},
+    {path:'Booking',component:Orders},
+    
     { path: 'HotelDetails', component: Hoteldetails },
     {
         path: 'Admin-DashBoard',

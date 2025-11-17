@@ -15,7 +15,7 @@ onSubmit(form:any){
   this.api.Validation(loginDetails).subscribe({
     next:(res)=>{
      
-      sessionStorage.setItem('JwtToken',res.accessToken);
+      localStorage.setItem('JwtToken',res.accessToken);
       sessionStorage.setItem('refreshToken',res.refreshToken);
       const token = sessionStorage.getItem('JwtToken');
    

@@ -1,5 +1,53 @@
 [
   {
+    "ContainingType": "HotelBookingSystem.Api.Controllers.AuthController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/Auth/refresh-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "HotelBookingSystem.Appilcation.Auth.command.RefreshTokenCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBookingSystem.Api.Controllers.AuthController",
+    "Method": "validateLogin",
+    "RelativePath": "api/Auth/validate-login-Customer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "HotelBookingSystem.Appilcation.Auth.Query.ValidateCustomerCredentialAuthQuery",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBookingSystem.Api.Controllers.AuthController",
+    "Method": "ValidatingLogin",
+    "RelativePath": "api/Auth/validate-login-Employee",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "HotelBookingSystem.Appilcation.Auth.Query.validatePasswordQuery",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HotelBookingSystem.Api.Controllers.BookingController",
     "Method": "CreateBooking",
     "RelativePath": "api/Booking",
@@ -119,6 +167,58 @@
     "ReturnTypes": [
       {
         "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBookingSystem.Api.Controllers.BookingController",
+    "Method": "GetBookingDeatils",
+    "RelativePath": "api/Booking/GetByCustomer{CustomerId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CustomerId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBookingSystem.Appilcation.Booking.Dtos.BookinDesplayDataDtos, HotelBookingSystem.Appilcation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBookingSystem.Api.Controllers.BookingController",
+    "Method": "GetBokinByRoomId",
+    "RelativePath": "api/Booking/RoomId{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBookingSystem.Domain.Entities.Booking, HotelBookingSystem.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -397,38 +497,6 @@
       {
         "Name": "hotelId",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HotelBookingSystem.Api.Controllers.EmployeeController",
-    "Method": "RefreshToken",
-    "RelativePath": "api/Employee/refresh-token",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "command",
-        "Type": "HotelBookingSystem.Application.Employee.Command.RefreshTokenCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HotelBookingSystem.Api.Controllers.EmployeeController",
-    "Method": "ValidatingLogin",
-    "RelativePath": "api/Employee/validate-login",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "query",
-        "Type": "HotelBookingSystem.Appilcation.Employee.Query.validatePasswordQuery",
         "IsRequired": true
       }
     ],

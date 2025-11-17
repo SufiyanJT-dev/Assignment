@@ -14,6 +14,7 @@ namespace HotelBookingSystem.Appilcation.Customer.Command
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string IdProofNumber { get; set; }
+        public string password { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Apicommuncation } from '../../../../../shared/Api/apicommuncation';
+import { ActivatedRoute } from '@angular/router';
 
 export interface BookingDetails {
   id?: number;
@@ -24,7 +25,7 @@ export class BookingComponent {
   showModal = false;
   isEditMode = false;
   currentBooking: BookingDetails = this.getEmptyBooking();
-  
+  roomId:number=0;
   statusOptions = [
     { value: 1, label: 'Pending' },
     { value: 2, label: 'Confirmed' },
@@ -33,14 +34,17 @@ export class BookingComponent {
     { value: 5, label: 'Cancelled' }
   ];
 
-  constructor(private api: Apicommuncation) {}
+  constructor(private api: Apicommuncation,private route:ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params=>{
+      this.roomId=params['roomId']
+    })
     this.loadBookings();
   }
 
   loadBookings() {
-    this.api.getAllBooking().subscribe({
+    this.api.GetBookinByRoomId(this.roomId).subscribe({
       next: (value) => {
         this.bookings = value;
         console.log('Bookings loaded:', value);

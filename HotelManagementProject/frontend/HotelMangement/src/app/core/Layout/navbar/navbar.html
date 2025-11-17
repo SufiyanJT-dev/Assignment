@@ -1,17 +1,31 @@
 <div class="NavBar">
   <div class="RightSide">
-    <div class="staycontainer">
-        
+    <div class="staycontainer" (click)="goHome">
       <img src="LogoIcon.svg" class="HotelImgIcon" alt="Logo">
-     
       <div class="imagecontainer">
-      <span>Stay</span>
-      <span class="Lighttext">Hub</span>
-       </div>
+        <span>Stay</span>
+        <span class="Lighttext">Hub</span>
+      </div>
     </div>
   </div>
-  <div>
-    <button class="ButtonRight" (click)="GotoLogin()">Sign In</button>
+
+     <div class="NavButtons" >
+    <!-- Login/Logout -->
+    <button class="ButtonRight" (click)="GotoLogin()">{{ buttonLabel }}</button>
+    
+
+    <button  class="ButtonRight" (click)="GotoProfile()">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+      </svg>
+      
+    </button>
    
+    <button class="ButtonRight" (click)="GotoBooking()">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M6 2a1 1 0 0 0-1 1v1H4a2 2 0 0 0-2 2v2h20V6a2 2 0 0 0-2-2h-1V3a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1H10V3a1 1 0 0 0-1-1H6zm16 8H2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V10zm-4 3v2h-4v-2h4z"/>
+      </svg>
+      
+    </button>
   </div>
 </div>

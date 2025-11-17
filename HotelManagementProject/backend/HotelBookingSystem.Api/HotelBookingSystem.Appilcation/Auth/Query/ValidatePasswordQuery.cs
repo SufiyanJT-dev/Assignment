@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBookingSystem.Appilcation.Employee.Query
+namespace HotelBookingSystem.Appilcation.Auth.Query
 {
    
         public class validatePasswordQuery : IRequest<(string accessToken, string refreshToken)>

@@ -17,9 +17,9 @@ export class Apicommuncation {
 
 
   private api = "https://localhost:7119/api/"
-  private baseUrl="https://localhost:7119/api/"
+  
   Validation(loginDetails: any): Observable<any> {
-    return this.http.post(this.api + 'Employee/validate-login', loginDetails, { withCredentials: true });
+    return this.http.post(this.api + 'Auth/validate-login-Employee', loginDetails, { withCredentials: true });
   }
   filtering(FilterQuery: any): Observable<any> {
     const params = new HttpParams({ fromObject: FilterQuery })
@@ -80,6 +80,9 @@ return this.http.post(`${this.api}Room`,formData)
 getAllBooking():Observable<any>{
 return this.http.get(`${this.api}Booking`);
 }
+GetBookinByRoomId(roomId:number):Observable<any>{
+  return this.http.get(`${this.api}Booking/roomId${roomId}`);
+}
 DeleteRoomType(id:number):Observable<any>{
 return this.http.delete(`${this.api}RoomType/${id}`,)
 }
@@ -93,45 +96,58 @@ UpdateRoomType(id:number,formData:RoomType):Observable<any>{
 
 // --- ADD NEW METHOD 1: INITIATE ---
   initiatePayment(command: InitiatePaymentCommand): Observable<PaymentOrderResponse> {
-    return this.http.post<PaymentOrderResponse>(`${this.api}/payment/initiate`, command);
+    return this.http.post<PaymentOrderResponse>(`${this.api}payment/initiate`, command);
   }
+
 
   // --- ADD NEW METHOD 2: VERIFY ---
   verifyPayment(command: VerifyPaymentCommand): Observable<any> {
-    return this.http.post<any>(`${this.api}/payment/verify`, command);
+    return this.http.post<any>(`${this.api}payment/verify`, command);
   }
 // GET single booking by ID
 getBookingById(id: number): Observable<BookingDetails> {
-  return this.http.get<BookingDetails>(`${this.baseUrl}/${id}`);
+  return this.http.get<BookingDetails>(`${this.api}/${id}`);
 }
 
 // POST create new booking
 createBooking(booking: BookingDetails): Observable<number> {
-  return this.http.post<number>(`${this.baseUrl}Booking/`, booking);
+  return this.http.post<number>(`${this.api}Booking/`, booking);
 }
 
 // PATCH update existing booking
 updateBooking(id: number, booking: BookingDetails): Observable<boolean> {
-  return this.http.patch<boolean>(`${this.baseUrl}Booking/${id}`, booking);
+  return this.http.patch<boolean>(`${this.api}Booking/${id}`, booking);
 }
 
 // DELETE booking
 deleteBooking(id: number): Observable<boolean> {
-  return this.http.delete<boolean>(`${this.baseUrl}Booking/${id}`);
+  return this.http.delete<boolean>(`${this.api}Booking/${id}`);
 }
 GetAllEmployeeByHotelId(HotelId:number):Observable<any>{
-  return this.http.get(`${this.baseUrl}Employee/hotel/${HotelId}`);
+  return this.http.get(`${this.api}Employee/hotel/${HotelId}`);
 }
 AddEmploee(formData:any):Observable<any>{
-  return this.http.post(`${this.baseUrl}Employee/`,formData);
+  return this.http.post(`${this.api}Employee/`,formData);
 }
 UpdateEmploee(id:number,formData:EmployeeDetails):Observable<any>{
-  return this.http.patch(`${this.baseUrl}Employee/${id}`,formData);
+  return this.http.patch(`${this.api}Employee/${id}`,formData);
 }
 deleteEmplyee(id:number):Observable<any>{
-  return this.http.delete(`${this.baseUrl}Employee/${id}`);
+  return this.http.delete(`${this.api}Employee/${id}`);
 }
 bookRoom(bookingPayload:any):Observable<any>{
-return this.http.post(`${this.baseUrl}`,bookingPayload)
+return this.http.post(`${this.api}`,bookingPayload)
+}
+CustomerAuthLogin(loginDetails:any){
+return this.http.post(`${this.api}Auth/validate-login-Customer`,loginDetails)
+}
+SignUpUser(SignUp:FormData){
+  return this.http.post(`${this.api}Customer`,SignUp);
+}
+GetUserDataById(id:number){
+  return this.http.get(`${this.api}Customer/${id}`);
+}
+GetBookingDataByUserID(id:number){
+  return this.http.get(`${this.api}Booking/GetByCustomer${id}`)
 }
 }

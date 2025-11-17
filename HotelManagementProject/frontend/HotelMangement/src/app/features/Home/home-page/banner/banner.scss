@@ -17,6 +17,15 @@
   object-fit: cover;
   display: block;
 }
+.error-message {
+  font-size: 0.85rem;
+  color: #dc3545;
+  margin-top: 0.3rem;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}
 
 .overlay {
   position: absolute;

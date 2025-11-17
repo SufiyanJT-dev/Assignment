@@ -1,4 +1,5 @@
-﻿using HotelBookingSystem.Appilcation.Customer.Command;
+﻿using HotelBookingSystem.Appilcation.Auth.Query;
+using HotelBookingSystem.Appilcation.Customer.Command;
 using HotelBookingSystem.Appilcation.Customer.Query;
 using HotelBookingSystem.Appilcation.Employee.Query;
 using HotelBookingSystem.Domain.Entities;

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Infrastucture\\HotelBookingSystem.Infrastucture.csproj": {}
+    "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Infrastucture\\HotelBookingSystem.Infrastucture.csproj": {}
   },
   "projects": {
-    "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj": {
+    "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj",
         "projectName": "HotelBookingSystem.Domain",
-        "projectPath": "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj",
-        "packagesPath": "C:\\Users\\sufiyan\\.nuget\\packages\\",
-        "outputPath": "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\obj\\",
+        "projectPath": "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj",
+        "packagesPath": "C:\\Users\\sufiyan.jt\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sufiyan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sufiyan.jt\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -65,24 +66,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Infrastucture\\HotelBookingSystem.Infrastucture.csproj": {
+    "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Infrastucture\\HotelBookingSystem.Infrastucture.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Infrastucture\\HotelBookingSystem.Infrastucture.csproj",
+        "projectUniqueName": "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Infrastucture\\HotelBookingSystem.Infrastucture.csproj",
         "projectName": "HotelBookingSystem.Infrastucture",
-        "projectPath": "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Infrastucture\\HotelBookingSystem.Infrastucture.csproj",
-        "packagesPath": "C:\\Users\\sufiyan\\.nuget\\packages\\",
-        "outputPath": "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Infrastucture\\obj\\",
+        "projectPath": "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Infrastucture\\HotelBookingSystem.Infrastucture.csproj",
+        "packagesPath": "C:\\Users\\sufiyan.jt\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Infrastucture\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sufiyan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sufiyan.jt\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -91,14 +92,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj": {
-                "projectPath": "D:\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj"
+              "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj": {
+                "projectPath": "C:\\Users\\sufiyan.jt\\Desktop\\DotNet\\CleanArch\\project\\AssigmentSufiyan\\HotelManagementProject\\backend\\HotelBookingSystem.Api\\HotelBookingSystem.Domain\\HotelBookingSystem.Domain.csproj"
               }
             }
           }
@@ -150,7 +152,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

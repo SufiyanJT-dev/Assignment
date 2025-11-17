@@ -16,7 +16,6 @@
     <p class="grand-total"><strong>Grand Total:</strong> ₹{{ booking.grandTotal }}</p>
   </div>
 
-  <form (ngSubmit)="onSubmit(booking)">
-    <button type="submit" class="btn btn-primary">Pay ₹{{ booking.grandTotal }}</button>
-  </form>
+    <button type="submit" class="btn btn-primary" (click)="payNow()">Pay ₹{{ booking.grandTotal }}</button>
+
 </div>

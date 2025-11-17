@@ -1,5 +1,4 @@
 ﻿using Azure.Core;
-using HotelBookingSystem.Appilcation.Employee.Query;
 using HotelBookingSystem.Domain.Entities;
 using HotelBookingSystem.Infrastructure.Data;
 using MediatR;
@@ -10,7 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HotelBookingSystem.Application.Employee.Query
+namespace HotelBookingSystem.Appilcation.Auth.Query
 {
     public class ValidatePasswordQueryHandler : IRequestHandler<validatePasswordQuery, (string accessToken, string refreshToken)>
     {
@@ -42,11 +41,12 @@ namespace HotelBookingSystem.Application.Employee.Query
             if (result == PasswordVerificationResult.Success)
             {
                 var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
-                var accessToken = await _jwtTokenGenerator.GenerateToken(employee.Email);
+                var accessToken = await _jwtTokenGenerator.GenerateToken(employee.Email,"Employee");
 
                 var tokenEntity = new RefreshToken
                 {
-                    EmployeeId = employee.Id,
+                    UserId = employee.Id,
+                    UserType = "Employee",
                     Token = refreshToken,
                     ExpiresAt = DateTime.UtcNow.AddDays(7),
                     CreatedAt = DateTime.UtcNow,

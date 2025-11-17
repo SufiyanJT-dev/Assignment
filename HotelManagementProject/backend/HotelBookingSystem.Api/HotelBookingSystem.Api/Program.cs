@@ -1,6 +1,6 @@
 ﻿using HotelBookingSystem.Api.Middleware;
+using HotelBookingSystem.Appilcation.Auth.Query;
 using HotelBookingSystem.Appilcation.Common;
-using HotelBookingSystem.Appilcation.Employee.Query;
 using HotelBookingSystem.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -20,6 +20,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IPasswordHasher<HotelBookingSystem.Domain.Entities.Customer>, PasswordHasher<HotelBookingSystem.Domain.Entities.Customer>>();
 builder.Services.AddScoped<IPasswordHasher<HotelBookingSystem.Domain.Entities.Employee>, PasswordHasher<HotelBookingSystem.Domain.Entities.Employee>>();
 builder.Services.AddSingleton<JwtTokenGenerator>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
