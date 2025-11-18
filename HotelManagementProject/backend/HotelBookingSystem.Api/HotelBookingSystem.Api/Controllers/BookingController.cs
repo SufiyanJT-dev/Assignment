@@ -7,6 +7,7 @@ using HotelBookingSystem.Appilcation.Review.Command;
 using HotelBookingSystem.Appilcation.Review.Dtos;
 using HotelBookingSystem.Appilcation.Review.Query;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,7 @@ namespace HotelBookingSystem.Api.Controllers
         }
         
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Appilcation.Booking.Dtos.AddBookingDtos>> GetByIDBooking(int id)
         {
             GetBookingByIdQuery query = new GetBookingByIdQuery();
@@ -51,6 +53,7 @@ namespace HotelBookingSystem.Api.Controllers
             return Ok(Customer);
         }
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<bool>> DeleteBooking(int id)
         {
             var command = new DeleteBookingCommand();
@@ -59,6 +62,7 @@ namespace HotelBookingSystem.Api.Controllers
             return await mediator.Send(command);
         }
         [HttpPatch("{id}")]
+        [Authorize]
         public async Task<ActionResult<bool>> UpdateBooking(UpdateBookingCommand commad, int id)
         {
 
@@ -69,6 +73,7 @@ namespace HotelBookingSystem.Api.Controllers
 
         }
         [HttpGet("RoomId{roomId}")]
+        [Authorize]
         public async Task<List<Domain.Entities.Booking>> GetBokinByRoomId(int roomId)
         {
             var query = new GetBookingByRoomIdQuery();
@@ -76,6 +81,7 @@ namespace HotelBookingSystem.Api.Controllers
             return await mediator.Send(query);
         }
         [HttpGet("GetByCustomer{CustomerId}")]
+        [Authorize]
         public async Task<List<BookinDesplayDataDtos>> GetBookingDeatils(int CustomerId)
         {
             GetBookingDetailsByCustomerIdQuery query =new  GetBookingDetailsByCustomerIdQuery();

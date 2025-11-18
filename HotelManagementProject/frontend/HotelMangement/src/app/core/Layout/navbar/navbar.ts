@@ -11,7 +11,7 @@ export class Navbar implements OnInit {
   jwttoken: string = '';
   buttonLabel: string = 'Login';
 isLoggedIn: boolean = true;
-isLoggedInpro: boolean = false;
+
   constructor(private router: Router) {}
 
   ngOnInit() {
@@ -19,19 +19,19 @@ isLoggedInpro: boolean = false;
     if (this.jwttoken) {
       this.buttonLabel = 'Logout';
       this.isLoggedIn = false;
-      this.isLoggedInpro=true;
+    
     }
   }
-  goHome(){
+goHome(){
     this.router.navigate(['/'])
   }
-GotoProfile(){
+gotoProfile(){
 this.router.navigate(['/Profile']);
 }
-GotoBooking(){
+gotoBooking(){
   this.router.navigate(['/Booking']);
 }
-  GotoLogin() {
+gotoLogin() {
     if (this.buttonLabel === 'Login') {
       
       this.router.navigate(['/login']);
@@ -41,7 +41,7 @@ GotoBooking(){
       this.jwttoken = '';
       this.buttonLabel = 'Login';
       this.isLoggedIn=true;
-      this.isLoggedInpro=false;
+     
       console.log('Logged out');
     }
   }

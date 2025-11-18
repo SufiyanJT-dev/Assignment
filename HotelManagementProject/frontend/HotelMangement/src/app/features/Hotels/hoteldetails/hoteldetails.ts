@@ -25,6 +25,12 @@ export interface Booking {
   checkOutDate: string;
   status: string;
 }
+export interface Search {
+  location: string;
+  checkInDate: string;
+  checkOutDate: string;
+  maxPrice: number;   
+}
 
 @Component({
   selector: 'app-hoteldetails',
@@ -80,7 +86,7 @@ export class Hoteldetails {
   // Booking action
   bookRoom(roomid:number) {
    
-   this.token=localStorage.getItem('JwtAssesToken') || ''; 
+   this.token=localStorage.getItem('JwtAccessToken') || ''; 
    if(this.token){
     this.router.navigate(['/BookingDeatils'],{queryParams:{Roomid:roomid}})
    }

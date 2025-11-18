@@ -1,13 +1,8 @@
-﻿using Azure.Core;
-using HotelBookingSystem.Domain.Entities;
+﻿using HotelBookingSystem.Domain.Entities;
 using HotelBookingSystem.Infrastructure.Data;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace HotelBookingSystem.Appilcation.Auth.Query
 {
@@ -16,6 +11,7 @@ namespace HotelBookingSystem.Appilcation.Auth.Query
         private readonly HotelDbContext _hotelDbContext;
         private readonly IPasswordHasher<Domain.Entities.Employee> _passwordHasher;
         private readonly JwtTokenGenerator _jwtTokenGenerator;
+
         public ValidatePasswordQueryHandler(
             HotelDbContext hotelDbContext,
             IPasswordHasher<Domain.Entities.Employee> passwordHasher,
@@ -32,35 +28,31 @@ namespace HotelBookingSystem.Appilcation.Auth.Query
                 .FirstOrDefaultAsync(e => e.Email == request.Email, cancellationToken);
 
             if (employee == null)
-            {
-                return (null, null); // or throw new UnauthorizedAccessException("Invalid Email");
-            }
+                return (null, null);
 
             var result = _passwordHasher.VerifyHashedPassword(employee, employee.password, request.Password);
 
-            if (result == PasswordVerificationResult.Success)
+            if (result != PasswordVerificationResult.Success)
+                return (null, null);
+
+            var rawRefreshToken = _jwtTokenGenerator.GenerateRefreshToken();
+            var hashedRefreshToken = _jwtTokenGenerator.HashRefreshToken(rawRefreshToken);
+            var accessToken = await _jwtTokenGenerator.GenerateToken(employee.Email, "Employee");
+
+            _hotelDbContext.RefreshTokens.Add(new RefreshToken
             {
-                var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
-                var accessToken = await _jwtTokenGenerator.GenerateToken(employee.Email,"Employee");
+                UserId = employee.Id,
+                UserType = "Employee",
+                Token = hashedRefreshToken,
+                ExpiresAt = DateTime.UtcNow.AddDays(7),
+                CreatedAt = DateTime.UtcNow,
+                Revoked = false
+            });
 
-                var tokenEntity = new RefreshToken
-                {
-                    UserId = employee.Id,
-                    UserType = "Employee",
-                    Token = refreshToken,
-                    ExpiresAt = DateTime.UtcNow.AddDays(7),
-                    CreatedAt = DateTime.UtcNow,
-                    Revoked = false
-                };
-                _hotelDbContext.RefreshTokens.Add(tokenEntity);
-                await _hotelDbContext.SaveChangesAsync(cancellationToken);
+            await _hotelDbContext.SaveChangesAsync(cancellationToken);
 
-                return (accessToken, refreshToken);
-            }
-
-            return (null, null); // or throw new UnauthorizedAccessException("Invalid Password");
+            return (accessToken, rawRefreshToken);
         }
-
 
     }
 }

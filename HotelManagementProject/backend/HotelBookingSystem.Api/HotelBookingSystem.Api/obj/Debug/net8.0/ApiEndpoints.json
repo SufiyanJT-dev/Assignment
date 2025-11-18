@@ -6,13 +6,7 @@
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "command",
-        "Type": "HotelBookingSystem.Appilcation.Auth.command.RefreshTokenCommand",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -1058,7 +1052,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.String",
+        "Type": "HotelBookingSystem.Domain.Entities.Rooms",
         "MediaTypes": [
           "text/plain",
           "application/json",

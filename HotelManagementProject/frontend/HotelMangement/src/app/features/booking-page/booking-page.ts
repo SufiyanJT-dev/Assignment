@@ -136,7 +136,7 @@ userId!:number;
             this.api.verifyPayment(verifyCommand).subscribe({
               next: (verifyResponse) => {
                 alert('Booking Confirmed!');
-                this.router.navigate(['/HotelDetails']); 
+                this.router.navigate(['/Booking']); 
               },
               error: (err) => {
                 alert('Payment verification failed. Please contact support.');

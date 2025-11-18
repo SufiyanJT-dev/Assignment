@@ -21,15 +21,15 @@ namespace HotelBookingSystem.Appilcation.Rooms.Query
         public async Task<List<Domain.Entities.Rooms>> Handle(FilterDataByHotelIdQuery request, CancellationToken cancellationToken)
         {
             var bookedRoomIds = hotelDbContext.Bookings
-           .Where(b => request.checkInDate < b.CheckOutDate && request.checkOutDate > b.CheckInDate)
+           .Where(b => request.checkInDate < b.CheckOutDate && request.checkOutDate > b.CheckInDate && b.Status!= BookingStatus.Confirmed)
            .Select(b => b.RoomId)
            .ToList();
 
             // Filter rooms based on location and availability
             var rooms = await hotelDbContext.Room
          .Where(r => r.HotelId == request.HotelId && !bookedRoomIds.Contains(r.Id))
-         .Include(r => r.hotel)     // navigation property
-         .Include(r => r.Bookings)  // navigation property
+         .Include(r => r.hotel)    
+         .Include(r => r.Bookings)
          .ToListAsync(cancellationToken);
 
             return rooms;

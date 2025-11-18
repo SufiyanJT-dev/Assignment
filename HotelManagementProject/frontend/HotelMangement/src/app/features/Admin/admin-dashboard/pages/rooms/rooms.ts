@@ -14,13 +14,16 @@ import { RoomUpdate } from './type/RoomUpdate';
   styleUrls: ['./rooms.scss'],
 })
 export class Rooms {
-  constructor(private api: Apicommuncation, private route: ActivatedRoute,private router :Router) {}
+  constructor(
+    private api: Apicommuncation,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   HotelId: number = 0;
   roomsList: Room[] = [];
   roomTypes: RoomType[] = [];
   roomTypeMap: { [id: number]: RoomType } = {};
-  roomUpdate:RoomUpdate[]=[];
   showForm: boolean = false;
   isEditMode: boolean = false;
   formData: any = {};
@@ -33,9 +36,13 @@ export class Rooms {
     });
   }
 
+  // ✅ Load rooms with fresh array reference
   loadRooms() {
     this.api.GetAllRoomsByHotelId(this.HotelId).subscribe({
-      next: (res) => this.roomsList = res,
+      next: (res) => {
+        this.roomsList = [...res]; // spread ensures Angular detects changes
+        console.log("Rooms reloaded", this.roomsList);
+      },
       error: (err) => console.log(err)
     });
   }
@@ -54,61 +61,58 @@ export class Rooms {
   onAddRoom() {
     this.showForm = true;
     this.isEditMode = false;
-    this.formData = { roomNumber: '', roomTypeId: 0, pricePerNight: 0, status: 0 ,hotelId:this.HotelId};
+    this.formData = {
+      roomNumber: '',
+      roomTypeId: 0,
+      pricePerNight: 0,
+      status: 0,
+      hotelId: this.HotelId
+    };
   }
 
+  // ✅ No mutation of original object
   onEditRoom(roomUpdate: RoomUpdate) {
     this.showForm = true;
     this.isEditMode = true;
-    this.formData = { ...roomUpdate };
-    
-    this.formData.hotelId = this.HotelId
-     roomUpdate.hotelId=this.formData.hotelId;
-     roomUpdate.pricePerNight=this.formData.pricePerNight;
-     roomUpdate.roomNumber=this.formData.pricePerNight;
-     roomUpdate.status=this.formData.status;
-     roomUpdate.roomTypeId=this.formData.roomTypeId;
+    this.formData = { ...roomUpdate, hotelId: this.HotelId };
   }
 
   onDeleteRoom(roomId: number) {
-    this.api.DeleteRoom(roomId).subscribe({   
-      next: () =>{ this.loadRooms()
-        
+    this.api.DeleteRoom(roomId).subscribe({
+      next: () => {
+        this.loadRooms(); // refresh list only
       },
       error: (err) => console.log(err)
     });
   }
 
   onBooking(roomId: number) {
-   this.router.navigate(['Admin-DashBoard/booking'], { queryParams: { roomId } })
+    this.router.navigate(['Admin-DashBoard/booking'], { queryParams: { roomId } });
   }
-GoToRoomType(id:number){
-  this.router.navigate(['Admin-DashBoard/RoomType'], { queryParams: { id } })
-}
+
+  GoToRoomType(id: number) {
+    this.router.navigate(['Admin-DashBoard/RoomType'], { queryParams: { id } });
+  }
+
   onSubmitRoom() {
     this.formData.roomTypeId = +this.formData.roomTypeId;
     this.formData.status = +this.formData.status;
     this.formData.hotelId = this.HotelId;
-   
-    if (this.isEditMode) {
-      this.api.UpdateRoom(this.formData.id,this.formData).subscribe({ 
-        next: () => { this.showForm = false; this.loadRooms(); 
-          console.log(this.formData);
-        },
-        error: (err) => {console.log(err)
-          console.log(this.formData)
-        }
-      });
-    } else {
-      
-      this.api.AddRoom(this.formData).subscribe({
-          
-        next: () => { this.showForm = false; this.loadRooms(); },
-        error: (err) => {console.log(err)
-          console.log(this.formData)
-        }
-      });
-    }
+
+    const request$ = this.isEditMode
+      ? this.api.UpdateRoom(this.formData.id, this.formData)
+      : this.api.AddRoom(this.formData);
+
+    request$.subscribe({
+      next: () => {
+        this.showForm = false;
+        this.loadRooms(); // refresh list
+      },
+      error: (err) => {
+        console.log(err);
+        console.log(this.formData);
+      }
+    });
   }
 
   onCancel() {

@@ -6,10 +6,17 @@ import { HotelDetails } from './Type/HotelDeatils';
 import { addHotelDeatils } from './Type/AddHotelDeatils';
 import { Router, RouterOutlet } from '@angular/router';
 import { log } from 'console';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-hotel',
-  imports: [FormsModule, CommonModule,RouterOutlet],
+  imports: [FormsModule,MatToolbarModule,MatGridListModule,MatIconModule,MatInputModule, MatFormFieldModule,MatCardModule,MatButtonModule,CommonModule,RouterOutlet],
   templateUrl: './hotel.html',
   styleUrl: './hotel.scss',
 })
@@ -69,7 +76,7 @@ export class Hotel {
     formData.append('Description', this.newHotels.Description);
     formData.append('PhoneNumber', this.newHotels.PhoneNumber);
     if (this.selectedFile) {
-      formData.append('image', this.selectedFile);
+      formData.append('Image', this.selectedFile);
     }
 
     this.api.AddHotel(formData).subscribe({
@@ -78,7 +85,9 @@ export class Hotel {
         console.log(value);
         this.ngOnInit()
       },
-      error: err => console.error(err)
+      error: err =>{
+         console.log(formData);
+        console.error(err)}
       
     });
  this.router.navigate([]);
@@ -128,8 +137,13 @@ export class Hotel {
       this.getAllHotel();
       this.selectedHotel = null;
       this.selectedFile = null;
+     
     },
-    error: err => console.error(err)
+    error: err => {console.error(err)
+      for (let [key, value] of formData.entries()) {
+  console.log(key, value);
+}
+    }
   });
 }
 

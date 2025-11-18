@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using HotelBookingSystem.Appilcation.Payment.Query;
 // --- ADD THESE ---
 using HotelBookingSystem.Appilcation.Payment.Dtos; // For the response DTO
-using System.Threading.Tasks; // For Task
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization; // For Task
 
 namespace HotelBookingSystem.Api.Controllers
 {
@@ -25,6 +26,7 @@ namespace HotelBookingSystem.Api.Controllers
 
         // --- NEW ENDPOINT 1: INITIATE PAYMENT ---
         [HttpPost("initiate")]
+        [Authorize]
         public async Task<ActionResult<PaymentOrderResponseDto>> InitiatePayment(InitiatePaymentCommand command)
         {
             // This command will create a Pending Booking and a Razorpay Order
@@ -33,6 +35,7 @@ namespace HotelBookingSystem.Api.Controllers
 
         // --- NEW ENDPOINT 2: VERIFY PAYMENT ---
         [HttpPost("verify")]
+        [Authorize]
         public async Task<ActionResult<string>> VerifyPayment(VerifyPaymentCommand command)
         {
             // This command will verify the Razorpay signature and create the Payment record

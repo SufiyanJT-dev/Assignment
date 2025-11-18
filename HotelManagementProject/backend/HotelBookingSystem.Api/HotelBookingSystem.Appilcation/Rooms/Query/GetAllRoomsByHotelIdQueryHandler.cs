@@ -20,7 +20,7 @@ namespace HotelBookingSystem.Appilcation.Rooms.Query
         public Task<List<Domain.Entities.Rooms>> Handle(GetAllRoomsByHotelIdQuery request, CancellationToken cancellationToken)
         {
             return hotelDbContext.Set<Domain.Entities.Rooms>()
-                .Where(r => r.HotelId == request.HotelId)
+                .Where(r => r.HotelId == request.HotelId )
                 .ToListAsync(cancellationToken);
         }
     }

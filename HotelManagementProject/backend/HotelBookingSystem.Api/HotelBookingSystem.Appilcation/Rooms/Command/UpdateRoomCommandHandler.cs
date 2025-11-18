@@ -53,7 +53,7 @@ namespace HotelBookingSystem.Appilcation.Rooms.Command
                     return new BadRequestObjectResult("Update not successful");
                 }
 
-                return new OkObjectResult("Update successful");
+                return new OkObjectResult(room);
             }
             catch (DbUpdateException dbEx)
             {

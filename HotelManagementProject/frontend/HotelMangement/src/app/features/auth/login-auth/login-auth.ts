@@ -9,21 +9,28 @@ import { Router } from '@angular/router';
   styleUrl: './login-auth.scss',
 })
 export class LoginAuth {
+  errorMessage:string="";
   constructor(private api:Apicommuncation,private router: Router){}
+  
 onSubmit(form:any){
   const loginDetails=form.value;
+  this.errorMessage="";
   this.api.Validation(loginDetails).subscribe({
     next:(res)=>{
-     
-      localStorage.setItem('JwtToken',res.accessToken);
-      sessionStorage.setItem('refreshToken',res.refreshToken);
-      const token = sessionStorage.getItem('JwtToken');
-   
+     console.log(res)
+      localStorage.setItem('JwtAccessToken',res.accessToken);
+      localStorage.setItem('userId',res.id)
+      const token = sessionStorage.getItem('JwtAccessToken');
+      
       console.log( res)
        this.router.navigate(['/Admin-DashBoard'])
     },
     error:(err)=>{
-       console.error('Login failed:', err);
+       if (err.status === 401) {
+          this.errorMessage = "Invalid email or password.";
+        } else {
+          this.errorMessage = "Something went wrong. Try again.";
+        }
     }
   })
 }

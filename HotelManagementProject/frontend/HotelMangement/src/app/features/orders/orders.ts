@@ -26,7 +26,7 @@ export class Orders implements OnInit {
   constructor(private router: Router, private api: Apicommuncation) {}
 
   ngOnInit() {
-    this.token = localStorage.getItem('JwtAssesToken') || '';
+    this.token = localStorage.getItem('JwtAccessToken') || '';
     this.storedUserID = localStorage.getItem('userId') || '';
 
     if (!this.token) {

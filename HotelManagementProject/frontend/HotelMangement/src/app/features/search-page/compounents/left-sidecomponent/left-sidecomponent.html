@@ -38,14 +38,15 @@
       <h3>Filter By</h3>
       <div class="PriceFilter">
         <h4 class="font-medium mb-2">Price Range</h4>
-        <input type="range" class="w-full" min="50" max="1000" value="500" />
+        <input type="range" class="w-full" min="50" max="1000000" value="500" [(ngModel)]="priceFilter"
+    (input)="onPriceChange()"/>
         <div class="priceLabels">
-          <span>$50</span>
-          <span>$1000+</span>
+          <span>$500</span>
+          <span>$10000+</span>
         </div>
       </div>
     </div>
-    <button class="Apply">Apply Filters</button>
+    <button class="Apply" (click)="OnApplyFilter()">Apply Filters</button>
     <div>
         
 

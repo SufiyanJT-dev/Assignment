@@ -4,8 +4,8 @@ import { EmployeeDetails } from './type/EmployeeDetails';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from 'express';
-import { Apicommuncation } from '../../../../../shared/Api/apicommuncation';
 import { error, log } from 'console';
+import { employeeServies } from './Services/employeeServies';
 
 @Component({
   selector: 'app-employees',
@@ -14,7 +14,7 @@ import { error, log } from 'console';
   styleUrl: './employees.scss',
 })
 export class Employees {
-  constructor(private route:ActivatedRoute,private api:Apicommuncation){}
+  constructor(private route:ActivatedRoute,private api:employeeServies){}
 isEditMode: boolean = false;
 
 showForm: boolean = false;

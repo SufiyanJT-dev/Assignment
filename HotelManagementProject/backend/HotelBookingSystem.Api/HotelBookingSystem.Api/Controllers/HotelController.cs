@@ -45,6 +45,7 @@ namespace HotelBookingSystem.Api.Controllers
         }
       
         [HttpGet]
+        [Authorize]
         public async Task<List<Domain.Entities.Hotel>> GetAll()
         {
             GetAllHotelDetailsQuery query= new GetAllHotelDetailsQuery();

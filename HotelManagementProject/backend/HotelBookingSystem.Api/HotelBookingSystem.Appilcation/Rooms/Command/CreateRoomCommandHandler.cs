@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingSystem.Appilcation.Rooms.Command
 {
-    public class CreateRoomTypeCommandHandler : IRequestHandler<CreateRoomCommand, ActionResult<string>>
+    public class CreateRoomTypeCommandHandler : IRequestHandler<CreateRoomCommand, ActionResult<Domain.Entities.Rooms>>
     {
         private readonly HotelDbContext hotelDbContext;
 
@@ -16,7 +16,7 @@ namespace HotelBookingSystem.Appilcation.Rooms.Command
             this.hotelDbContext = hotelDbContext;
         }
 
-        public async Task<ActionResult<string>> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
+        public async Task<ActionResult<Domain.Entities.Rooms>> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace HotelBookingSystem.Appilcation.Rooms.Command
                     return new BadRequestObjectResult("Room was not added. Please try again.");
                 }
 
-                return new OkObjectResult("Room added successfully.");
+                return new OkObjectResult(room);
             }
             catch (Exception ex)
             {

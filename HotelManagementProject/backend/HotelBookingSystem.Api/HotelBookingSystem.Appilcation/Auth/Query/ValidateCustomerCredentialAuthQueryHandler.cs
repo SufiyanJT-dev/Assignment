@@ -2,6 +2,7 @@
 using HotelBookingSystem.Infrastructure.Data;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,35 +24,40 @@ namespace HotelBookingSystem.Appilcation.Auth.Query
             this.passwordHasher = passwordHasher;
             this.jwtTokenGenerator = jwtTokenGenerator;
         }
-        public async Task<(string accessToken, string refreshToken, int id, string role)> Handle(ValidateCustomerCredentialAuthQuery request, CancellationToken cancellationToken)
+        public async Task<(string accessToken, string refreshToken, int id, string role)> Handle(
+     ValidateCustomerCredentialAuthQuery request,
+     CancellationToken cancellationToken)
         {
-            var customer =await  hotelDbContext.Customers.FirstOrDefaultAsync(e=>e.Email== request.email);
-           
+            var customer = await hotelDbContext.Customers
+                .FirstOrDefaultAsync(e => e.Email == request.email, cancellationToken);
+
+            // If customer not found or password invalid, return nulls
             if (customer == null)
-            {
-                throw new UnauthorizedAccessException("Invalid credentials");
-            }
+                return (null, null, 0, null);
+
             var result = passwordHasher.VerifyHashedPassword(customer, customer.password, request.Password);
-            if (result == PasswordVerificationResult.Success)
+            if (result != PasswordVerificationResult.Success)
+                return (null, null, 0, null);
+
+            // Generate tokens
+            var newAccessToken = await jwtTokenGenerator.GenerateToken(customer.Email, "Customer");
+            var newRefreshToken = jwtTokenGenerator.GenerateRefreshToken();
+
+            var tokenEntity = new RefreshToken
             {
-                var newAccessToken = await jwtTokenGenerator.GenerateToken(customer.Email, "Customer");
-                var newRefreshToken = jwtTokenGenerator.GenerateRefreshToken();
+                UserId = customer.Id,
+                Token = newRefreshToken,
+                ExpiresAt = DateTime.UtcNow.AddDays(7),
+                CreatedAt = DateTime.UtcNow,
+                Revoked = false,
+                UserType = "Customer"
+            };
 
-                var tokenEntity = new RefreshToken
-                {
-                    UserId = customer.Id,
-                    Token = newRefreshToken,
-                    ExpiresAt = DateTime.UtcNow.AddDays(7),
-                    CreatedAt = DateTime.UtcNow,
-                    Revoked = false,
-                    UserType= "Customer"
+            hotelDbContext.RefreshTokens.Add(tokenEntity);
+            await hotelDbContext.SaveChangesAsync(cancellationToken);
 
-                };
-                hotelDbContext.RefreshTokens.Add(tokenEntity);
-                await hotelDbContext.SaveChangesAsync(cancellationToken);
-                return (newAccessToken, newRefreshToken, customer.Id, "Customer");
-            }
-            throw new UnauthorizedAccessException("Invalid credentials");
+            return (newAccessToken, newRefreshToken, customer.Id, "Customer");
         }
+
     }
 }

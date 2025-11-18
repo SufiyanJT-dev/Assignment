@@ -1,13 +1,11 @@
-﻿using HotelBookingSystem.Appilcation.Auth.Query;
+﻿using HotelBookingSystem.Appilcation.Auth.command;
+using HotelBookingSystem.Appilcation.Auth.Query;
 using HotelBookingSystem.Domain.Entities;
 using HotelBookingSystem.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace HotelBookingSystem.Appilcation.Auth.command
+namespace HotelBookingSystem.Appilcation.Auth.Command
 {
     public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, (string accessToken, string refreshToken)>
     {
@@ -22,37 +20,38 @@ namespace HotelBookingSystem.Appilcation.Auth.command
 
         public async Task<(string accessToken, string refreshToken)> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
         {
+            var hashedToken = _jwtTokenGenerator.HashRefreshToken(request.RefreshToken);
+
             var tokenEntity = await _hotelDbContext.RefreshTokens
-                .FirstOrDefaultAsync(t => t.Token == request.RefreshToken && !t.Revoked, cancellationToken);
+                .FirstOrDefaultAsync(t => t.Token == hashedToken && !t.Revoked, cancellationToken);
 
             if (tokenEntity == null || tokenEntity.ExpiresAt < DateTime.UtcNow)
                 throw new UnauthorizedAccessException("Invalid or expired refresh token");
-            if (tokenEntity.UserType != "Employee")
-            {
 
+            // revoke old token
+            tokenEntity.Revoked = true;
+
+            string newAccessToken;
+            string newRefreshToken = _jwtTokenGenerator.GenerateRefreshToken();
+            string hashedNewRefreshToken = _jwtTokenGenerator.HashRefreshToken(newRefreshToken);
+
+            if (tokenEntity.UserType == "Employee")
+            {
                 var employee = await _hotelDbContext.Employees.FindAsync(tokenEntity.UserId);
                 if (employee == null)
                     throw new UnauthorizedAccessException("User not found");
 
-                var newAccessToken = await _jwtTokenGenerator.GenerateToken(employee.Email, request.UserType);
-                var newRefreshToken = _jwtTokenGenerator.GenerateRefreshToken();
-
-                tokenEntity.Revoked = true;
+                newAccessToken = await _jwtTokenGenerator.GenerateToken(employee.Email, "Employee");
 
                 _hotelDbContext.RefreshTokens.Add(new RefreshToken
                 {
                     UserId = employee.Id,
-                    Token = newRefreshToken,
+                    Token = hashedNewRefreshToken,
                     ExpiresAt = DateTime.UtcNow.AddDays(7),
                     CreatedAt = DateTime.UtcNow,
                     Revoked = false,
                     UserType = "Employee"
-
                 });
-
-                await _hotelDbContext.SaveChangesAsync(cancellationToken);
-
-                return (newAccessToken, newRefreshToken);
             }
             else
             {
@@ -60,26 +59,22 @@ namespace HotelBookingSystem.Appilcation.Auth.command
                 if (customer == null)
                     throw new UnauthorizedAccessException("User not found");
 
-                var newAccessToken = await _jwtTokenGenerator.GenerateToken(customer.Email, request.UserType);
-                var newRefreshToken = _jwtTokenGenerator.GenerateRefreshToken();
-
-                tokenEntity.Revoked = true;
+                newAccessToken = await _jwtTokenGenerator.GenerateToken(customer.Email, "Customer");
 
                 _hotelDbContext.RefreshTokens.Add(new RefreshToken
                 {
                     UserId = customer.Id,
-                    Token = newRefreshToken,
+                    Token = hashedNewRefreshToken,
                     ExpiresAt = DateTime.UtcNow.AddDays(7),
                     CreatedAt = DateTime.UtcNow,
                     Revoked = false,
                     UserType = "Customer"
-
                 });
-
-                await _hotelDbContext.SaveChangesAsync(cancellationToken);
-
-                return (newAccessToken, newRefreshToken);
             }
+
+            await _hotelDbContext.SaveChangesAsync(cancellationToken);
+
+            return (newAccessToken, newRefreshToken); // return raw refresh token to client
         }
     }
 }

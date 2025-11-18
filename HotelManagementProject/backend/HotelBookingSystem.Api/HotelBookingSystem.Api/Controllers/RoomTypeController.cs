@@ -5,6 +5,7 @@ using HotelBookingSystem.Appilcation.RoomType.Dtos;
 using HotelBookingSystem.Appilcation.RoomType.Query;
 using HotelBookingSystem.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,7 @@ namespace HotelBookingSystem.Api.Controllers
             this.mediator = mediator;
         }
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<string>> CreateRoomType(CreateRoomTypeCommand command)
         {
             return await mediator.Send(command);

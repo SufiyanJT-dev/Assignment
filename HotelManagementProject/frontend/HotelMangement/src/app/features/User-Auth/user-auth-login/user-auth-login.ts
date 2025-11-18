@@ -3,11 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { Apicommuncation } from '../../../shared/Api/apicommuncation';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-// Define the expected response type
-interface LoginResponse {
-  accessToken: string;
-  // add other fields if your API returns them
-}
+import { Console } from 'console';
+
 
 @Component({
   selector: 'app-user-auth-login',
@@ -18,7 +15,7 @@ interface LoginResponse {
 })
 export class UserAuthLogin implements OnInit {
   returnUrl: string = '/';
-
+  errormessage:string="";
   constructor(
     private api: Apicommuncation,
     private router: Router,
@@ -34,15 +31,20 @@ loginResponse:any;
     this.api.CustomerAuthLogin(loginDetails).subscribe({
        next: (res) => {
         this.loginResponse = res;
-        localStorage.setItem('JwtAssesToken', this.loginResponse.accessToken);
-        localStorage.setItem('userId',this.loginResponse.id)
-        
-       
+        localStorage.setItem('JwtAccessToken', this.loginResponse.accessToken);
+        localStorage.setItem('role',this.loginResponse.role)
+         localStorage.setItem('userId',res.id)
+       console.log(this.loginResponse)
         this.location.back();
       },
       error: (err) => {
         console.log(loginDetails);
         console.error('Login failed:', err);
+         if(err.status===401){
+              this.errormessage="Invalid Password or Email"
+          }else{
+            this.errormessage="something went wrong"
+          }
       },
     });
   }

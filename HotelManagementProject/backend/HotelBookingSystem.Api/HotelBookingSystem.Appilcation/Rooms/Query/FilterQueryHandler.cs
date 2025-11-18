@@ -1,4 +1,5 @@
 ﻿using HotelBookingSystem.Appilcation.Rooms.Query;
+using HotelBookingSystem.Domain.Entities;
 using HotelBookingSystem.Infrastructure.Data;
 using MediatR;
 
@@ -18,7 +19,7 @@ public class FilterQueryHandler : IRequestHandler<FilterQuery, List<Domain.Entit
     {
         // Get all room IDs that are booked during the requested period
         var bookedRoomIds = hotelDbContext.Bookings
-            .Where(b => request.checkInDate < b.CheckOutDate && request.checkOutDate > b.CheckInDate)
+            .Where(b => request.checkInDate < b.CheckOutDate && request.checkOutDate > b.CheckInDate && b.Status != BookingStatus.Confirmed)
             .Select(b => b.RoomId)
             .ToList();
 

@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class UserAuthSignUp implements OnInit {
   signupForm!: FormGroup;
-
+  errormessage:string="";
   constructor(private fb: FormBuilder,private router:Router,private api:Apicommuncation) {}
 
   ngOnInit(): void {
@@ -49,6 +49,7 @@ export class UserAuthSignUp implements OnInit {
         },
         error:(err)=>{
           console.log(err);
+         
         }
       })
 

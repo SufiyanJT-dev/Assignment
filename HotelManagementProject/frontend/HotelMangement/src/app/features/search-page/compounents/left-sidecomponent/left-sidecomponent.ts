@@ -15,11 +15,12 @@ import { Search } from './type/SerachInterface';
 })
 export class LeftSidecomponent implements OnInit {
   isEditing: boolean = false;
-
+priceFilter: number = 30000;
   Search: Search = {
     location: '',
     checkInDate: '',
-    checkOutDate: ''
+    checkOutDate: '',
+   
   };
 
   constructor(
@@ -31,6 +32,7 @@ export class LeftSidecomponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.Search = {
+        
         location: params['location'] || '',
         checkInDate: params['checkInDate'] || '',
         checkOutDate: params['checkOutDate'] || ''
@@ -43,8 +45,22 @@ export class LeftSidecomponent implements OnInit {
     this.isEditing = !this.isEditing;
     
   }
+onPriceChange() {
+  console.log("Price selected:", this.priceFilter);
+}
+ OnApplyFilter(){
+    this.priceFilter
+      this.router.navigate([], {
+      queryParams: {
+        maxPrice:  this.priceFilter,
+        location: this.Search.location,
+        checkInDate: this.Search.checkInDate,
+        checkOutDate: this.Search.checkOutDate
+      },
+      queryParamsHandling: 'merge'
+    });
 
- 
+ }
 
   applyChanges() {
     this.isEditing = false;
@@ -52,6 +68,7 @@ export class LeftSidecomponent implements OnInit {
 
     this.router.navigate([], {
       queryParams: {
+        maxPrice:  this.priceFilter,
         location: this.Search.location,
         checkInDate: this.Search.checkInDate,
         checkOutDate: this.Search.checkOutDate

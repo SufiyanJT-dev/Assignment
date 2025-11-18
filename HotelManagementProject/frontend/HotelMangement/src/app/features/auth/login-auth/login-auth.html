@@ -1,5 +1,6 @@
 <div class="LoginContainer">
   <h2 class="LoginTitle">Welcome Back</h2>
+  <p>{{errorMessage}}</p>
  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
   <div class="form-group">
     <label for="email">Email</label>
@@ -9,7 +10,8 @@
     <label for="password">Password</label>
     <input type="password" name="password" ngModel placeholder="Enter your password" required>
   </div>
-  <button type="submit">Login</button>
+  
+  <button type="submit" class="LoginFormbutton">Login</button>
 </form>
 
 </div>

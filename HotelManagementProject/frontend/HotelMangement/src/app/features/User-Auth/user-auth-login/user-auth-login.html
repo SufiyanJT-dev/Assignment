@@ -1,5 +1,6 @@
 <div class="LoginContainer">
   <h2 class="LoginTitle">Welcome Back</h2>
+  <p>{{errormessage}}</p>
  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
   <div class="form-group">
     <label for="email">Email</label>

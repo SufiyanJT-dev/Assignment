@@ -23,7 +23,7 @@ export class Profile {
   constructor(private router:Router,private api:Apicommuncation){}
 ngOnInit(){
    this.storedUserID=localStorage.getItem('userId')||''
-   this.token=localStorage.getItem('JwtAssesToken') || ''; 
+   this.token=localStorage.getItem('JwtAccessToken') || ''; 
    if(this.token){
     this.router.navigate(['/Profile'])
     if(this.storedUserID){

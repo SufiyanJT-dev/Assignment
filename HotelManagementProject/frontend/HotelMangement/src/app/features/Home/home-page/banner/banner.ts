@@ -23,9 +23,7 @@ ngOnInit() {
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
 
-  // Format as yyyy-MM-dd for input[type="date"]
-  this.todaydate = today.toISOString().split('T')[0];
-  this.tomorrow = tomorrow.toISOString().split('T')[0];
+
 }
 
 onSearch(form: any) {

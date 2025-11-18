@@ -1,47 +1,108 @@
-
 <div class="hotel-page">
-  <div class="page-header">Hotel Management</div>
 
-  <!-- Add Hotel Button -->
-  <button class="primary-btn" (click)="toggleForm()">Add Hotel</button>
+  <!-- Header -->
+  <div class="header">
+    <h1>🏨 Hotel Management</h1>
+
+    <div class="actions">
+      <input class="search-box" type="text" placeholder="🔍 Search hotels..."
+             [(ngModel)]="searchTerm">
+
+      <button class="primary-btn" (click)="toggleForm()">
+        <span *ngIf="!showForm">➕ Add Hotel</span>
+        <span *ngIf="showForm">❌ Close</span>
+      </button>
+    </div>
+  </div>
 
   <!-- Add Hotel Form -->
-  <div class="hotel-form" *ngIf="showForm && !selectedHotel">
-    <input type="text" [(ngModel)]="newHotels.Name" placeholder="Hotel Name" />
-    <input type="text" [(ngModel)]="newHotels.Address" placeholder="Address" />
-    <input type="text" [(ngModel)]="newHotels.City" placeholder="City" />
-    <input type="text" [(ngModel)]="newHotels.Country" placeholder="Country" />
-    <input type="text" [(ngModel)]="newHotels.Description" placeholder="Description" />
-    <input type="text" [(ngModel)]="newHotels.PhoneNumber" placeholder="Phone Number" />
-    <input type="file" (change)="onFileSelected($event)" />
-    <button (click)="addHotel()">Submit</button>
+  <div class="modern-form" *ngIf="showForm && !selectedHotel">
+    
+    <div class="form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Hotel Name *</mat-label>
+        <input matInput [(ngModel)]="newHotels.Name" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Address *</mat-label>
+        <input matInput [(ngModel)]="newHotels.Address" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>City *</mat-label>
+        <input matInput [(ngModel)]="newHotels.City" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Country *</mat-label>
+        <input matInput [(ngModel)]="newHotels.Country" required />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description *</mat-label>
+      <textarea matInput rows="3" [(ngModel)]="newHotels.Description" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Phone Number *</mat-label>
+      <input matInput type="tel" [(ngModel)]="newHotels.PhoneNumber" required />
+    </mat-form-field>
+
+    <label class="file-upload">
+      <input type="file" (change)="onFileSelected($event)" required />
+      📁 Upload Hotel Image
+    </label>
+
+    <button class="submit-btn" (click)="addHotel()">✅ Submit</button>
   </div>
 
   <!-- Hotel List -->
-  <div class="hotel-list">
+  <div class="hotel-grid">
     <div class="hotel-card" *ngFor="let hotel of filteredHotels()">
-      <img [src]="hotel.path" alt="{{ hotel.name }}" class="hotel-image" />
-      <h3>{{ hotel.name }}</h3>
-      <p><strong>Address:</strong> {{ hotel.address }}</p>
-      <p><strong>City:</strong> {{ hotel.city }}</p>
-      <p><strong>Country:</strong> {{ hotel.country }}</p>
-      <p><strong>Description:</strong> {{ hotel.description }}</p>
-      <p><strong>Phone:</strong> {{ hotel.phoneNumber }}</p>
+      <img [src]="hotel.path" class="hotel-img" />
 
-      <button (click)="editHotel(hotel)">Update</button>
-      <button (click)="deleteHotel(hotel.id)">Delete</button>
-      <button (click)="goToRoomList(hotel.id)">RoomList</button>
-      <button (click)="GotoEmployee(hotel.id)">Assign Employee</button>
-      <!-- Inline Edit Form -->
-      <div *ngIf="selectedHotel?.id === hotel.id">
-        <input type="text" [(ngModel)]="selectedHotel.name" />
-        <input type="text" [(ngModel)]="selectedHotel.address" />
-        <input type="text" [(ngModel)]="selectedHotel.city" />
-        <input type="text" [(ngModel)]="selectedHotel.country" />
-        <input type="text" [(ngModel)]="selectedHotel.description" />
-        <input type="text" [(ngModel)]="selectedHotel.phoneNumber" />
-        <input type="file" (change)="onFileSelected($event)" />
-        <button (click)="saveHotel()">Save</button>
+      <h2>{{ hotel.name }}</h2>
+
+      <div class="info">
+        <p>📍 {{ hotel.address }}</p>
+        <p>🏙 {{ hotel.city }}, {{ hotel.country }}</p>
+        <p class="desc">📝 {{ hotel.description }}</p>
+        <p>📞 {{ hotel.phoneNumber }}</p>
+      </div>
+
+      <div class="card-buttons">
+        <button class="btn green" (click)="editHotel(hotel)">✏️ Edit</button>
+        <button class="btn red" (click)="deleteHotel(hotel.id)">🗑 Delete</button>
+        <button class="btn blue" (click)="goToRoomList(hotel.id)">🛏 Rooms</button>
+        <button class="btn orange" (click)="GotoEmployee(hotel.id)">👨‍💼 Employees</button>
+      </div>
+
+      <!-- Edit Form -->
+      <div class="modern-form edit-box" *ngIf="selectedHotel?.id === hotel.id">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Hotel Name *</mat-label>
+          <input matInput [(ngModel)]="selectedHotel.name" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address *</mat-label>
+          <input matInput [(ngModel)]="selectedHotel.address" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description *</mat-label>
+          <textarea matInput [(ngModel)]="selectedHotel.description" required></textarea>
+        </mat-form-field>
+
+        <label class="file-upload">
+          <input type="file" (change)="onFileSelected($event)" />
+          📁 Change Image
+        </label>
+
+        <button class="submit-btn" (click)="saveHotel()">💾 Save</button>
       </div>
     </div>
   </div>

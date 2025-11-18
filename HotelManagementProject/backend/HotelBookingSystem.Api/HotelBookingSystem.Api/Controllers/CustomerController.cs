@@ -4,6 +4,7 @@ using HotelBookingSystem.Appilcation.Customer.Query;
 using HotelBookingSystem.Appilcation.Employee.Query;
 using HotelBookingSystem.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -26,6 +27,7 @@ namespace HotelBookingSystem.Api.Controllers
             return await mediator.Send(command);
         }
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Appilcation.Customer.Dtos.AddCustomerDtos>> GetByIDCustomer(int id)
         {
             GetCustomerByIdQuery query = new GetCustomerByIdQuery();

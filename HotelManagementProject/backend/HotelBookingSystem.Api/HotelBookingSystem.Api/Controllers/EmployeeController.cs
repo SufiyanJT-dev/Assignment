@@ -25,12 +25,14 @@ namespace HotelBookingSystem.Api.Controllers
         }
        
         [HttpPost]
+        [Authorize]
         public async Task<string> CreateEmployee(CreateEmployeeCommand command)
         {
             return await mediator.Send(command);
         }
        
         [HttpGet]
+        [Authorize]
         public async Task<List<Domain.Entities.Employee>> GetEmployeeAsync()
         {
             GetAllEmployeeQuery query = new GetAllEmployeeQuery();
@@ -44,6 +46,7 @@ namespace HotelBookingSystem.Api.Controllers
             return await mediator.Send(query);
         }
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<string>> DeleteRoomType(int id)
         {
             DeleteEmployeeCommand command = new DeleteEmployeeCommand();
@@ -73,6 +76,7 @@ namespace HotelBookingSystem.Api.Controllers
         //    return Ok("Logged out successfully.");
         //}
         [HttpGet("hotel/{hotelId}")]
+        [Authorize]
         public async Task<IActionResult> GetByHotelId(int hotelId)
         {
            GetAllEmployeeByHotelIdQuery query= new GetAllEmployeeByHotelIdQuery();

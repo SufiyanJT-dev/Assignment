@@ -1,21 +1,94 @@
-<div class="booking-container">
-  <h2>Booking Summary</h2>
+<!-- HTML (Angular-friendly bindings kept) -->
+<div class="checkout">
+  <section class="summary-card" aria-labelledby="summary-heading">
+    <div class="card-head">
+      <h2 id="summary-heading">Booking Summary</h2>
+      <button class="icon-btn" aria-label="Help about booking">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 14a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM11 7h2v5h-2V7z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
 
-  <div class="room-details">
-    <p><strong>Room Number:</strong> {{ bookedRoomDeatils.roomNumber }}</p>
-    <p><strong>Price per Night:</strong> ₹{{ bookedRoomDeatils.pricePerNight }}</p>
-    <p><strong>Check-In:</strong> {{ booking.checkInDate }}</p>
-    <p><strong>Check-Out:</strong> {{ booking.checkOutDate }}</p>
-    <p><strong>Nights:</strong> {{ booking.nights }}</p>
-  </div>
+    <div class="card-body">
+      <div class="room-info">
+        <div class="room-left">
+          <div class="room-photo" role="img" aria-label="Room photo placeholder"></div>
+        </div>
 
-  <div class="amount-details">
-    <p><strong>Subtotal:</strong> ₹{{ booking.totalAmount }}</p>
-    <p><strong>Tax (10%):</strong> ₹{{ booking.tax }}</p>
-    <hr />
-    <p class="grand-total"><strong>Grand Total:</strong> ₹{{ booking.grandTotal }}</p>
-  </div>
+        <div class="room-right">
+          <p class="meta"><strong>Room</strong> <span class="muted">• Room Number</span></p>
+          <h3 class="room-title">Room #{{ bookedRoomDeatils.roomNumber }}</h3>
+          <p class="price">₹{{ bookedRoomDeatils.pricePerNight }} <span class="muted">/ night</span></p>
 
-    <button type="submit" class="btn btn-primary" (click)="payNow()">Pay ₹{{ booking.grandTotal }}</button>
+          <div class="dates">
+            <div><strong>Check-in</strong><div class="muted">{{ booking.checkInDate }}</div></div>
+            <div><strong>Check-out</strong><div class="muted">{{ booking.checkOutDate }}</div></div>
+            <div><strong>Nights</strong><div class="muted">{{ booking.nights }}</div></div>
+          </div>
+        </div>
+      </div>
 
+      <hr class="divider" />
+
+      <div class="costs">
+        <div class="line">
+          <span>Subtotal</span>
+          <span class="amount">₹{{ booking.totalAmount }}</span>
+        </div>
+
+        <div class="line">
+          <span>Tax (10%)</span>
+          <span class="amount">₹{{ booking.tax }}</span>
+        </div>
+
+        <div class="promo-row">
+          <input id="promo" class="promo-input" type="text" placeholder="Promo code" aria-label="Promo code" />
+          <button id="applyPromo" class="apply-btn">Apply</button>
+        </div>
+
+        <div class="grand">
+          <div>
+            <small class="muted">Total</small>
+            <div class="grand-title">Grand Total</div>
+          </div>
+          <div class="grand-amount">₹{{ booking.grandTotal }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-foot">
+      <button class="pay-btn" type="button" (click)="payNow()">
+        Pay ₹{{ booking.grandTotal }}
+        <svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </button>
+      <div class="secure">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 1 3 5v6c0 5 3 9 9 11 6-2 9-6 9-11V5l-9-4z" fill="currentColor" opacity="0.12"/>
+          <path d="M12 17a3 3 0 100-6 3 3 0 000 6z" fill="currentColor"/>
+        </svg>
+        <span class="muted">Secure payment</span>
+      </div>
+    </div>
+  </section>
+
+  <aside class="sidebar">
+    <div class="policy">
+      <h4>Price details</h4>
+      <ul>
+        <li>Free cancellation within 24 hours</li>
+        <li>Check-in from 2:00 PM</li>
+        <li>Taxes included where applicable</li>
+      </ul>
+    </div>
+
+    <div class="guest-info">
+      <h4>Guest details</h4>
+      <p class="muted">Add guest name and contact at next step.</p>
+    </div>
+  </aside>
 </div>
+
+

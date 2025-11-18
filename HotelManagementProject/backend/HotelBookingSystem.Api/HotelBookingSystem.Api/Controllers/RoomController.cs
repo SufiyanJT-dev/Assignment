@@ -3,6 +3,7 @@ using HotelBookingSystem.Appilcation.Rooms.Dtos;
 using HotelBookingSystem.Appilcation.Rooms.Query;
 using HotelBookingSystem.Infrastructure.Data;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
@@ -21,7 +22,7 @@ namespace HotelBookingSystem.Api.Controllers
             this.mediator = mediator;
         }
         [HttpPost]
-        public Task<ActionResult<string>> CreateRoom(CreateRoomCommand command) { 
+        public Task<ActionResult<Domain.Entities.Rooms>> CreateRoom(CreateRoomCommand command) { 
             return mediator.Send(command);
         }
         [HttpGet]
@@ -30,14 +31,16 @@ namespace HotelBookingSystem.Api.Controllers
             GetAllRoomQuery query = new GetAllRoomQuery();
             return mediator.Send(query);
         }
+        
         [HttpGet("{id}")]
+        [Authorize]
         public Task<ActionResult<Appilcation.Rooms.Dtos.RoomGetByIdDtos>> GetByidRoomQuery(int id) {
             GetRoomByIdQuery query = new GetRoomByIdQuery();
         query.Id = id;
             return mediator.Send(query);
         }
         [HttpDelete("{id}")]
-        public Task<string> deleteRoom(int id) {
+        public Task<ActionResult<string>> deleteRoom(int id) {
             DeleteRoomCommand command= new DeleteRoomCommand();
             command.Id = id;
             return mediator.Send(command);

@@ -3,16 +3,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Apicommuncation } from '../../../../../shared/Api/apicommuncation';
 import { ActivatedRoute } from '@angular/router';
+import { BookingDetails } from './type/BookingDetails';
+import { BookingServies } from './Services/booking-servies';
 
-export interface BookingDetails {
-  id?: number;
-  customerId: number;
-  roomId: number;
-  checkInDate: string;
-  checkOutDate: string;
-  status: number;
-  totalAmount: number;
-}
 
 @Component({
   selector: 'app-booking',
@@ -34,7 +27,7 @@ export class BookingComponent {
     { value: 5, label: 'Cancelled' }
   ];
 
-  constructor(private api: Apicommuncation,private route:ActivatedRoute) {}
+  constructor(private api: BookingServies,private route:ActivatedRoute) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params=>{
@@ -155,3 +148,5 @@ export class BookingComponent {
     };
   }
 }
+
+

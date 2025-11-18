@@ -9,7 +9,7 @@ using static HotelBookingSystem.Domain.Entities.Rooms;
 
 namespace HotelBookingSystem.Appilcation.Rooms.Command
 {
-    public class CreateRoomCommand:IRequest<ActionResult<string>>
+    public class CreateRoomCommand:IRequest<ActionResult<Domain.Entities.Rooms>>
     {
      
         public string RoomNumber { get; set; }

@@ -1,5 +1,6 @@
 ﻿using HotelBookingSystem.Infrastructure.Data;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingSystem.Appilcation.Rooms.Command
 {
-    public class DeleteRoomTypeCommandHandler : IRequestHandler<DeleteRoomCommand, string>
+    public class DeleteRoomTypeCommandHandler : IRequestHandler<DeleteRoomCommand, ActionResult<string>>
     {
         private readonly HotelDbContext hotelDbContext;
 
@@ -17,18 +18,18 @@ namespace HotelBookingSystem.Appilcation.Rooms.Command
         {
             this.hotelDbContext = hotelDbContext;
         }
-        public async  Task<string> Handle(DeleteRoomCommand request, CancellationToken cancellationToken)
+        public async  Task<ActionResult<string>> Handle(DeleteRoomCommand request, CancellationToken cancellationToken)
         {
             Domain.Entities.Rooms room= await hotelDbContext.Room.FirstOrDefaultAsync(r=>r.Id==request.Id);
             if (room == null) {
-                return "Room Not Found";
+                return new NotFoundObjectResult("not found");
             }
             hotelDbContext.Room.Remove(room);
            int a= hotelDbContext.SaveChanges();
             if (a < 0) {
                 return "Failed To delete";
             }
-            return $"{request.Id} deleted";
+            return new OkObjectResult(room);
         }
     }
 }
