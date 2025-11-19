@@ -25,7 +25,7 @@ namespace HotelBookingSystem.Api.Controllers
         }
        
         [HttpPost]
-        [Authorize]
+       
         public async Task<string> CreateEmployee(CreateEmployeeCommand command)
         {
             return await mediator.Send(command);

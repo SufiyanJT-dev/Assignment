@@ -104,10 +104,8 @@
 }
 .profile-menu button:hover { background: #f4f4f4; }
 
-/* show menu on hover (or you can wire to a click state) */
 .profile:hover .profile-menu { display: flex; }
 
-/* Responsive */
 @media (max-width: 900px) {
   .menu-toggle { display: inline-flex; }
 

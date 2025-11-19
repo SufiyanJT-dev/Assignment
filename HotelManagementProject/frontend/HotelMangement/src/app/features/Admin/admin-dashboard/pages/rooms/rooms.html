@@ -1,8 +1,9 @@
 <div class="rooms-container">
   <h2>Rooms for Hotel {{ HotelId }}</h2>
 
-  <!-- Add Room Button -->
+ 
   <button class="add-room-btn" (click)="onAddRoom()">+ Add Room</button>
+   <button class="action-btn add" (click)="goToRoomType()">Room Type Details</button>
 <div class="room-form" *ngIf="showForm">
     <h3>{{ isEditMode ? 'Edit Room' : 'Add Room' }}</h3>
     <form (ngSubmit)="onSubmitRoom()">
@@ -29,7 +30,7 @@
         Status:
         <select [(ngModel)]="formData.status" name="status">
           <option [value]="0">Available</option>
-          <option [value]="1">Booked</option>
+          <option [value]="2">UnderMaintenance</option>
         </select>
       </label>
 
@@ -39,7 +40,7 @@
       <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
     </form>
   </div>
-  <!-- Rooms Table -->
+ 
   <table class="rooms-table" *ngIf="roomsList && roomsList.length > 0; else noRooms">
     <thead>
       <tr>
@@ -57,10 +58,10 @@
         <td>{{ roomTypeMap[room.roomTypeId]?.typeName }}</td>
         <td>{{ roomTypeMap[room.roomTypeId]?.capacity }}</td>
         <td>{{ room.pricePerNight }}</td>
-        <td>{{ room.status === 0 ? 'Available' : 'Booked' }}</td>
+        <td>{{ room.status === 0 ? 'Available' : 'UnderMaintenance' }}</td>
         <td>
           <button class="action-btn edit" (click)="onEditRoom(room)">Edit</button>
-           <button class="action-btn add" (click)="GoToRoomType(room.id)">Room Type Details</button>
+          
           <button class="action-btn delete" (click)="onDeleteRoom(room.id)">Delete</button>
           <button class="action-btn booking" (click)="onBooking(room.id)">Show Booking</button>
         </td>
@@ -72,6 +73,6 @@
     <p>No rooms found for this hotel.</p>
   </ng-template>
 
-  <!-- Add/Edit Room Form -->
+ 
   
 </div>

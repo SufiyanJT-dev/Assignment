@@ -29,7 +29,7 @@ export class Orders implements OnInit {
     this.token = localStorage.getItem('JwtAccessToken') || '';
     this.storedUserID = localStorage.getItem('userId') || '';
 
-    if (!this.token) {
+    if (!this.storedUserID) {
       this.router.navigate(['/login']);
       return;
     }

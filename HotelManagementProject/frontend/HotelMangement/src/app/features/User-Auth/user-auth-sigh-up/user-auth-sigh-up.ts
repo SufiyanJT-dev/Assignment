@@ -31,7 +31,7 @@ export class UserAuthSignUp implements OnInit {
     );
   }
 
-  // Custom validator for password match
+ 
   passwordMatchValidator(control: AbstractControl) {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;

@@ -54,6 +54,9 @@ userId!:number;
     if(this.storedUserID){
       this.userId=Number(this.storedUserID);
     }
+    else{
+      this.router.navigate(['/login'])
+    }
    
    
     this.searchData = this.serachServices.getData();
@@ -85,7 +88,7 @@ userId!:number;
     if (nights > 0) {
       this.booking.nights = nights;
       const subtotal = nights * this.bookedRoomDeatils.pricePerNight;
-      const tax = subtotal * 0.1; // 10% tax
+      const tax = subtotal * 0.18; 
       this.booking.totalAmount = subtotal;
       this.booking.tax = tax;
       
@@ -145,10 +148,14 @@ userId!:number;
               }
             });
           },
-          prefill: {
-            name: 'Customer Name', 
-            email: 'customer.email@example.com',
-          },
+          modal: {
+          ondismiss: () => {
+            alert('Payment popup closed. Booking not completed.');
+            console.log('User dismissed the Razorpay popup');
+           
+            this.router.navigate(['/Booking']); 
+          }
+        },
           theme: {
             color: '#3399cc'
           }
@@ -165,21 +172,6 @@ userId!:number;
 
     });
   }
-  onSubmit(formValue: any) {
-    const inDate = new Date(formValue.checkInDate);
-    const outDate = new Date(formValue.checkOutDate);
-    if (outDate <= inDate) {
-      alert('Check-out must be after check-in.');
-      return;
-    }
-
-    this.calculateTotals();
-
-    console.log('Booking payload:', {
-      ...formValue,
-      totalAmount: this.booking.totalAmount,
-      tax: this.booking.tax,
-      grandTotal: this.booking.grandTotal
-    });
-  }
+  
+  
 }

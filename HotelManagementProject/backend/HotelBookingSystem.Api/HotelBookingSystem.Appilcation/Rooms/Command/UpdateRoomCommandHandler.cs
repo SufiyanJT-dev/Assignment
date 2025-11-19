@@ -29,12 +29,13 @@ namespace HotelBookingSystem.Appilcation.Rooms.Command
                     return new NotFoundObjectResult("Room ID not found");
                 }
 
-                // Update only if valid, else keep old value
                 room.RoomNumber = !string.IsNullOrWhiteSpace(request.RoomNumber) && request.RoomNumber != "string"
                     ? request.RoomNumber
                     : room.RoomNumber;
 
-            
+                room.Status =
+                        request.Status;
+                       
                 room.PricePerNight = request.PricePerNight > 0
                     ? request.PricePerNight
                     : room.PricePerNight;

@@ -17,13 +17,13 @@ public class FilterQueryHandler : IRequestHandler<FilterQuery, List<Domain.Entit
 
     public Task<List<Domain.Entities.Rooms>> Handle(FilterQuery request, CancellationToken cancellationToken)
     {
-        // Get all room IDs that are booked during the requested period
+       
         var bookedRoomIds = hotelDbContext.Bookings
             .Where(b => request.checkInDate < b.CheckOutDate && request.checkOutDate > b.CheckInDate && b.Status != BookingStatus.Confirmed)
             .Select(b => b.RoomId)
             .ToList();
 
-        // Filter rooms based on location and availability
+        
         var rooms = hotelDbContext.Room
             .Include(r => r.hotel)
             .Where(r =>

@@ -36,11 +36,11 @@ export class Rooms {
     });
   }
 
-  // ✅ Load rooms with fresh array reference
+ 
   loadRooms() {
     this.api.GetAllRoomsByHotelId(this.HotelId).subscribe({
       next: (res) => {
-        this.roomsList = [...res]; // spread ensures Angular detects changes
+        this.roomsList = [...res]; 
         console.log("Rooms reloaded", this.roomsList);
       },
       error: (err) => console.log(err)
@@ -70,7 +70,7 @@ export class Rooms {
     };
   }
 
-  // ✅ No mutation of original object
+
   onEditRoom(roomUpdate: RoomUpdate) {
     this.showForm = true;
     this.isEditMode = true;
@@ -80,7 +80,7 @@ export class Rooms {
   onDeleteRoom(roomId: number) {
     this.api.DeleteRoom(roomId).subscribe({
       next: () => {
-        this.loadRooms(); // refresh list only
+        this.loadRooms(); 
       },
       error: (err) => console.log(err)
     });
@@ -90,8 +90,8 @@ export class Rooms {
     this.router.navigate(['Admin-DashBoard/booking'], { queryParams: { roomId } });
   }
 
-  GoToRoomType(id: number) {
-    this.router.navigate(['Admin-DashBoard/RoomType'], { queryParams: { id } });
+  goToRoomType() {
+    this.router.navigate(['Admin-DashBoard/RoomType']);
   }
 
   onSubmitRoom() {
@@ -106,7 +106,8 @@ export class Rooms {
     request$.subscribe({
       next: () => {
         this.showForm = false;
-        this.loadRooms(); // refresh list
+        console.log(this.formData)
+        this.loadRooms(); 
       },
       error: (err) => {
         console.log(err);

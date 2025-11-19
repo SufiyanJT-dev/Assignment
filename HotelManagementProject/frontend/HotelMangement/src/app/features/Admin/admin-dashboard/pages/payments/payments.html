@@ -5,18 +5,7 @@
       <p class="subtitle">Recent transactions and payment details</p>
     </div>
 
-    <div class="actions" role="search" aria-label="Search payments">
-      <input
-        type="search"
-        placeholder="Search by id, booking, order or payment id, amount..."
-        [(ngModel)]="search"
-        (ngModelChange)="applySearch()"
-        aria-label="Search payments"
-      />
-      <button class="btn" type="button" (click)="loadPayments()" aria-label="Refresh payments">
-        Refresh
-      </button>
-    </div>
+
   </header>
 
   <main class="content">

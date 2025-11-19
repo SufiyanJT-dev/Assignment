@@ -1,21 +1,13 @@
 <div class="hotel-page">
 
-  <!-- Header -->
+
   <div class="header">
     <h1>🏨 Hotel Management</h1>
 
-    <div class="actions">
-      <input class="search-box" type="text" placeholder="🔍 Search hotels..."
-             [(ngModel)]="searchTerm">
-
-      <button class="primary-btn" (click)="toggleForm()">
-        <span *ngIf="!showForm">➕ Add Hotel</span>
-        <span *ngIf="showForm">❌ Close</span>
-      </button>
-    </div>
+    
   </div>
 
-  <!-- Add Hotel Form -->
+ 
   <div class="modern-form" *ngIf="showForm && !selectedHotel">
     
     <div class="form-grid">
@@ -58,7 +50,7 @@
     <button class="submit-btn" (click)="addHotel()">✅ Submit</button>
   </div>
 
-  <!-- Hotel List -->
+ 
   <div class="hotel-grid">
     <div class="hotel-card" *ngFor="let hotel of filteredHotels()">
       <img [src]="hotel.path" class="hotel-img" />
@@ -79,7 +71,7 @@
         <button class="btn orange" (click)="GotoEmployee(hotel.id)">👨‍💼 Employees</button>
       </div>
 
-      <!-- Edit Form -->
+     
       <div class="modern-form edit-box" *ngIf="selectedHotel?.id === hotel.id">
 
         <mat-form-field appearance="outline" class="full-width">
@@ -104,6 +96,10 @@
 
         <button class="submit-btn" (click)="saveHotel()">💾 Save</button>
       </div>
+      <div class="toast" *ngIf="showToast" [ngClass]="toastType">
+  {{ toastMessage }}
+</div>
+
     </div>
   </div>
 </div>

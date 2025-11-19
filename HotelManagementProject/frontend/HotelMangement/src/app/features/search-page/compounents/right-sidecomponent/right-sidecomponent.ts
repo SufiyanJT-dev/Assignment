@@ -64,32 +64,32 @@ export class RightSidecomponent implements OnInit {
 
         response.forEach((room: any) => {
           const hotel = room.hotel;
-          if (!hotel) return; // skip invalid rooms
+          if (!hotel) return; 
 
           const existingHotel = hotelMap.get(hotel.id);
 
           if (!existingHotel) {
-            // Add hotel first time
+            
             hotelMap.set(hotel.id, {
               ...hotel,
               lowestPrice: room.pricePerNight,
             });
           } else {
-            // Update lowest price safely
+         
             if (room.pricePerNight < existingHotel.lowestPrice) {
               existingHotel.lowestPrice = room.pricePerNight;
-              hotelMap.set(hotel.id, existingHotel); // update map
+              hotelMap.set(hotel.id, existingHotel);
             }
           }
         });
 
-        // ✅ Filter by maxPrice
+        
     this.HotelValues = Array.from(hotelMap.values()).filter(
-  hotel => hotel.lowestPrice <= (this.formValues?.maxPrice ?? 3000)
+  hotel => hotel.lowestPrice <= (this.formValues?.maxPrice ?? 300000)
 );
 
 
-        // ✅ Apply initial sort if needed
+      
         this.onSortChange();
       },
       error: (err) => {
@@ -106,7 +106,7 @@ export class RightSidecomponent implements OnInit {
     } else if (this.selectedSort === 'highToLow') {
       this.HotelValues.sort((a, b) => b.lowestPrice - a.lowestPrice);
     } else {
-      // "recommended" or default → no sorting, keep API order
+     
     }
   }
 

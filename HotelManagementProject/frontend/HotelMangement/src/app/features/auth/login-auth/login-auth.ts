@@ -19,7 +19,7 @@ onSubmit(form:any){
     next:(res)=>{
      console.log(res)
       localStorage.setItem('JwtAccessToken',res.accessToken);
-      localStorage.setItem('userId',res.id)
+     
       const token = sessionStorage.getItem('JwtAccessToken');
       
       console.log( res)

@@ -31,7 +31,12 @@ export interface Search {
   checkOutDate: string;
   maxPrice: number;   
 }
-
+export interface RoomType {
+     id: number;
+      typeName: string;
+      description: string;
+      capacity: number;
+}
 @Component({
   selector: 'app-hoteldetails',
   imports: [Navbar,CommonModule],
@@ -44,6 +49,7 @@ export class Hoteldetails {
   hotelId: number = 0;
 
   rooms: Room[] = [];
+  roomTypes:RoomType[]=[]
   loading = false;
   error: string | null = null;
   token:string=''
@@ -69,8 +75,14 @@ export class Hoteldetails {
       checkInDate: this.searchData?.checkInDate,
       checkOutDate: this.searchData?.checkOutDate,
     };
-
-    this.loading = true;
+    
+    this.api.getAllRoomType().subscribe({
+      next: (res) => {
+        this.roomTypes = res;
+      },
+      error: (err) => console.error('Error loading room types:', err)
+    });
+  
     this.api.getFilteredHotelRooms(payload).subscribe({
       next: (value: Room[]) => {
         this.rooms = value;
@@ -81,9 +93,12 @@ export class Hoteldetails {
         this.loading = false;
       }
     });
+    
   }
-
-  // Booking action
+getRoomTypeDetails(roomTypeId: number): RoomType | undefined {
+  return this.roomTypes.find(type => type.id === roomTypeId);
+}
+  
   bookRoom(roomid:number) {
    
    this.token=localStorage.getItem('JwtAccessToken') || ''; 

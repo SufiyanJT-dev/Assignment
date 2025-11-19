@@ -4,8 +4,8 @@
 <app-navbar></app-navbar>
    
     <nav class="breadcrumbs">
-      <a href="#">Home</a> &gt;
-      <a href="#">{{selectedHotelDetails.city}}</a> &gt;
+      <a href="/">Home</a> &gt;
+      <a href="">{{selectedHotelDetails.city}}</a> &gt;
       <span>{{selectedHotelDetails.name}}</span>
     </nav>
 
@@ -38,23 +38,30 @@
 
 
 
-
 <section class="rooms" *ngIf="rooms.length; else noRooms">
   <h2>Available Rooms</h2>
 
   <div class="room-card" *ngFor="let room of rooms">
     <div class="room-info">
-      <h3>{{ room.roomNumber }}</h3>
-      <p>Type: {{ room.roomType || ('Type #' + room.roomTypeId) }}</p>
+      <h3>Room #{{ room.roomNumber }}</h3>
+
+      <!-- Get the room type details -->
+      <ng-container *ngIf="getRoomTypeDetails(room.roomTypeId) as type">
+        <p>Type: {{ type.typeName }}</p>
+        <p>Capacity: {{ type.capacity }} guests</p>
+        <p>Description: {{ type.description }}</p>
+      </ng-container>
+
       <p>Price: ₹{{ room.pricePerNight }} / night</p>
       <p>Status: {{ room.status }}</p>
     </div>
 
     <div class="room-actions">
-      <button class="btn btn-primary" (click)="bookRoom(room.id)" >Book</button>
+      <button class="btn btn-primary" (click)="bookRoom(room.id)">Book</button>
     </div>
   </div>
 </section>
+
 
 <ng-template #noRooms>
   <p>No rooms available for your selected dates.</p>

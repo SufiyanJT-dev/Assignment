@@ -41,20 +41,6 @@ export class Payments {
     });
   }
 
-  applySearch() {
-    const q = this.search.trim().toLowerCase();
-    if (!q) {
-      this.filtered = this.payments.slice().reverse();
-      return;
-    }
-    this.filtered = this.payments.filter(p =>
-      String(p.id).includes(q) ||
-      String(p.bookingId ?? '').toLowerCase().includes(q) ||
-      String(p.razorpayOrderId ?? '').toLowerCase().includes(q) ||
-      String(p.razorpayPaymentId ?? '').toLowerCase().includes(q) ||
-      String(p.amount).includes(q)
-    ).reverse();
-  }
 
   selectPayment(p: any) {
     this.selected = p;
@@ -64,7 +50,6 @@ export class Payments {
     this.selected = null;
   }
 
-  // small helper to present method name
   methodLabel(m: number | string) {
     switch (String(m)) {
       case '1': return 'Cash';
@@ -75,7 +60,6 @@ export class Payments {
     }
   }
 
-  // format ISO date into readable format
   prettyDate(iso?: string) {
     if (!iso) return '-';
     try {

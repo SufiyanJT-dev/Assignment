@@ -1,6 +1,4 @@
-/* This is your existing SCSS, just with the parent class changed 
-  to '.room-type-container' for proper encapsulation.
-*/
+
 .room-type-container {
   padding: 20px;
   background: #f5f7fa;
@@ -28,7 +26,7 @@
     }
   }
 
-  .room-type-table { // Renamed from .rooms-table
+  .room-type-table { 
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 12px;
@@ -88,7 +86,7 @@
       &:hover { background: #c0392b; }
     }
     
-    // You can remove this if not needed
+    
     &.booking {
       background: #f39c12;
       color: white;
@@ -96,7 +94,7 @@
     }
   }
 
-  .room-form { // Re-used your existing .room-form style
+  .room-form { 
     margin-top: 25px;
     padding: 20px;
     background: #fff;
@@ -120,15 +118,14 @@
         font-weight: 500;
         color: #34495e;
 
-        /* NEW STYLE: Added 'textarea' here to match your inputs
-        */
+        
         input, select, textarea {
           margin-top: 6px;
           padding: 10px;
           border: 1px solid #ccc;
           border-radius: 6px;
           font-size: 14px;
-          font-family: inherit; // Ensures textarea font matches
+          font-family: inherit; 
         }
       }
 

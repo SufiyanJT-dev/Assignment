@@ -58,7 +58,7 @@ namespace HotelBookingSystem.Appilcation.Hotels.Command
                 if (result <= 0)
                     return new BadRequestObjectResult("Hotel was not added. Please try again.");
 
-                return new OkObjectResult("Hotel added successfully.");
+                return new OkObjectResult(hotel);
             }
             catch (Exception ex)
             {

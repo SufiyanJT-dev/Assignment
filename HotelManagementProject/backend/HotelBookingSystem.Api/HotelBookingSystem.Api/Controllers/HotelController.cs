@@ -52,7 +52,7 @@ namespace HotelBookingSystem.Api.Controllers
             return await mediator.Send(query);
         }
         [HttpDelete("{id}")]
-        public async Task<string> DeleteHotel(int id)
+        public async Task<ActionResult<string>> DeleteHotel(int id)
         {
             DeleteHotelCommand command= new DeleteHotelCommand();
             command.Id= id;

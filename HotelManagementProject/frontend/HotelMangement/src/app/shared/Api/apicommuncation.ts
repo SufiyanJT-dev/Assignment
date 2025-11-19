@@ -108,7 +108,7 @@ bookRoom(bookingPayload:any):Observable<any>{
 return this.http.post(`${this.api}`,bookingPayload)
 }
 CustomerAuthLogin(loginDetails:any):Observable<any>{
-return this.http.post(`${this.api}Auth/validate-login-Customer`,loginDetails)
+return this.http.post(`${this.api}Auth/validate-login-Customer`,loginDetails, { withCredentials: true })
 }
 SignUpUser(SignUp:FormData):Observable<any>{
   return this.http.post(`${this.api}Customer`,SignUp);

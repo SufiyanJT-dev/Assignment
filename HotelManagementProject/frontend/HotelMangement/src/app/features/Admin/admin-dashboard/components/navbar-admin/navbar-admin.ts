@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarAdmin {
   isMenuOpen = false;
-  @Output() logout = new EventEmitter<void>();
-
+  
   constructor(private router: Router) {}
 
   toggleMenu() {
@@ -22,8 +21,10 @@ export class NavbarAdmin {
   }
 
   onLogout() {
-    // emit event so parent can handle clearing auth / redirect
-    this.logout.emit();
+   
+    
+  localStorage.removeItem('userId');
+  localStorage.removeItem('role');
     localStorage.removeItem('JwtAccessToken')
     this.router.navigate(['/AdminLogin']);
   }

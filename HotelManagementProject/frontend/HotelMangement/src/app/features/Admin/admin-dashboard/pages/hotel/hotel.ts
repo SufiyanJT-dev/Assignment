@@ -33,11 +33,13 @@ export class Hotel {
     Path: ''
   };
   selectedHotel: any = {};
-
+  toastMessage = "";
+toastType: 'success' | 'error' = 'success';
+showToast = false;
   selectedFile: File | null = null;
   showForm = false;
   searchTerm = '';
-
+  
   constructor(private api: Apicommuncation, private router: Router) {}
 
   ngOnInit() {
@@ -64,8 +66,17 @@ export class Hotel {
 
   toggleForm() {
     this.showForm = !this.showForm;
-    this.selectedHotel = null; // reset edit mode
+    this.selectedHotel = null; 
   }
+  showToastMessage(message: string, type: 'success' | 'error') {
+  this.toastMessage = message;
+  this.toastType = type;
+  this.showToast = true;
+
+  setTimeout(() => {
+    this.showToast = false;
+  }, 3000);
+}
 
   addHotel() {
     const formData = new FormData();
@@ -84,10 +95,16 @@ export class Hotel {
       next:(value)=> {
         console.log(value);
         this.ngOnInit()
+        this.showToastMessage("Hotel added successfully!", "success");
       },
       error: err =>{
          console.log(formData);
-        console.error(err)}
+       if (err.status === 400) {
+      this.showToastMessage("You must enter all values.", "error");
+    } else {
+      this.showToastMessage("Something went wrong. Try again.", "error");
+    }
+      }
       
     });
  this.router.navigate([]);
@@ -108,7 +125,7 @@ export class Hotel {
   }
 
   editHotel(hotel: HotelDetails) {
-    this.selectedHotel = { ...hotel }; // copy data
+    this.selectedHotel = { ...hotel };
   }
 
   saveHotel() {
@@ -116,24 +133,23 @@ export class Hotel {
 
   const formData = new FormData();
 
-  // Required fields
   formData.append('Name', this.selectedHotel.name);
   formData.append('Address', this.selectedHotel.address);
   formData.append('City', this.selectedHotel.city);
   formData.append('Country', this.selectedHotel.country);
   formData.append('PhoneNumber', this.selectedHotel.phoneNumber);
 
-  // Add description
+
   formData.append('Description', this.selectedHotel.description);
 
-  // Add image if selected
   if (this.selectedFile) {
     formData.append('Image', this.selectedFile);
   }
 
-  // Call API with id + formData
+
   this.api.UpdateHotel(this.selectedHotel.id, formData).subscribe({
     next: () => {
+       this.showToastMessage("Hotel Updated successfully!", "success")
       this.getAllHotel();
       this.selectedHotel = null;
       this.selectedFile = null;
@@ -142,6 +158,8 @@ export class Hotel {
     error: err => {console.error(err)
       for (let [key, value] of formData.entries()) {
   console.log(key, value);
+    this.showToastMessage("Something went wrong. Try again.", "error");
+  
 }
     }
   });
@@ -153,7 +171,14 @@ export class Hotel {
      
       
       next: () => this.getAllHotel(),
-      error: err => console.error(err)
+      error: err => {
+        
+        this.showToastMessage("Hotel Deleted successfully!", "success");
+            if (err.status === 400) {
+      
+      this.showToastMessage("Something went wrong. Try again.", "error");
+    }
+        console.error(err)}
     });
   }
   GotoEmployee(hotelId: number){

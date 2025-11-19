@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Apicommuncation } from '../../../../shared/Api/apicommuncation';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SerachServices } from '../../Shared/serach-services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Search } from './type/SerachInterface';
 
@@ -24,7 +23,7 @@ priceFilter: number = 30000;
   };
 
   constructor(
-    private serachService: SerachServices,
+    
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -38,7 +37,7 @@ priceFilter: number = 30000;
         checkOutDate: params['checkOutDate'] || ''
       };
     });
-    this.serachService.setData(this.Search);
+    
   }
 
   toggleEdit() {

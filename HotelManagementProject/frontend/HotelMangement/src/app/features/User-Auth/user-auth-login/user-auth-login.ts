@@ -33,7 +33,7 @@ loginResponse:any;
         this.loginResponse = res;
         localStorage.setItem('JwtAccessToken', this.loginResponse.accessToken);
         localStorage.setItem('role',this.loginResponse.role)
-         localStorage.setItem('userId',res.id)
+         localStorage.setItem('userId',this.loginResponse.id)
        console.log(this.loginResponse)
         this.location.back();
       },

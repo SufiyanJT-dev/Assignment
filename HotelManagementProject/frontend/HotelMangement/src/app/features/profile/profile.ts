@@ -24,12 +24,13 @@ export class Profile {
 ngOnInit(){
    this.storedUserID=localStorage.getItem('userId')||''
    this.token=localStorage.getItem('JwtAccessToken') || ''; 
-   if(this.token){
+   if(!this.storedUserID){
     this.router.navigate(['/Profile'])
+   }
     if(this.storedUserID){
       this.userId=Number(this.storedUserID);
     }
-   }
+  
    else{
      this.router.navigate(['/login'])
    }
@@ -48,6 +49,8 @@ ngOnInit(){
 }
 Logout(){
   localStorage.removeItem('JwtAssesToken');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('role');
   this.router.navigate(['/']);
 }
 }

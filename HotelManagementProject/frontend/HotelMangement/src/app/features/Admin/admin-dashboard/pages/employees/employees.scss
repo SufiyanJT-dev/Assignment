@@ -1,4 +1,4 @@
-/* ------- Page Layout ------- */
+
 :host {
   display: block;
   padding: 20px;
@@ -10,7 +10,7 @@ p {
   font-weight: 500;
 }
 
-/* ------- Add Employee Button ------- */
+
 button {
   cursor: pointer;
   border: none;
@@ -30,7 +30,6 @@ button.primary {
   }
 }
 
-/* ------- Form Container ------- */
 .room-form {
   background: #ffffff;
   margin-top: 20px;
@@ -96,7 +95,7 @@ button.primary {
   }
 }
 
-/* ------- Table Container ------- */
+
 .TableContainer {
   margin-top: 30px;
   overflow-x: auto;
@@ -125,7 +124,6 @@ button.primary {
     }
   }
 
-  /* ------- Action Buttons ------- */
   .action-btn {
     padding: 6px 12px;
     border-radius: 5px;
@@ -153,7 +151,7 @@ button.primary {
   }
 }
 
-/* ------- Mobile Responsive ------- */
+
 @media (max-width: 600px) {
   .room-form {
     width: 100%;

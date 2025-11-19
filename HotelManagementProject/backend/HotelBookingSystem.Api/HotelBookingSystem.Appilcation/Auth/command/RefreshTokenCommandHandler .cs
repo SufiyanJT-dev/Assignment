@@ -28,7 +28,7 @@ namespace HotelBookingSystem.Appilcation.Auth.Command
             if (tokenEntity == null || tokenEntity.ExpiresAt < DateTime.UtcNow)
                 throw new UnauthorizedAccessException("Invalid or expired refresh token");
 
-            // revoke old token
+            
             tokenEntity.Revoked = true;
 
             string newAccessToken;

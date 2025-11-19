@@ -37,7 +37,7 @@
 
 .content { display: grid; grid-template-columns: 1fr 360px; gap: 16px; align-items: start; }
 
-/* Table card */
+
 .table-card {
   background: var(--card);
   border-radius: var(--radius);
@@ -70,15 +70,14 @@
 .ell { max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; vertical-align: middle; }
 .amount { font-weight: 700; color: #0b1220; }
 
-/* actions column */
+
 .actions-col { text-align: right; width: 120px; }
 .link { background: transparent; border: 0; color: var(--accent); cursor: pointer; font-weight: 600; padding: 6px 8px; border-radius: 6px; }
 .link:hover { text-decoration: underline; }
 
-/* empty / loader */
+
 .empty, .loader, .error { padding: 18px; color: var(--muted); }
 
-/* Detail drawer */
 .detail-drawer {
   position: relative;
 }

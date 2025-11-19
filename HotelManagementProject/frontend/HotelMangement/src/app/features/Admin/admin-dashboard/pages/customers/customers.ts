@@ -10,7 +10,7 @@ interface Customer {
   fullName: string;
   idProofNumber: string;
   phoneNumber: string;
-  // add other fields returned by your API as needed
+  
 }
 
 @Component({
@@ -41,7 +41,7 @@ export class Customers implements OnInit {
     this.error = null;
     this.api.getAllCustomer().subscribe({
       next: (value: any) => {
-        // if API returns array directly
+        
         this.customers = Array.isArray(value) ? value : (value?.data ?? []);
         this.filtered = [...this.customers];
         this.loading = false;
