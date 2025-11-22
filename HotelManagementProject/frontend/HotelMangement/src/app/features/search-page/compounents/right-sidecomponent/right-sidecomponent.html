@@ -1,0 +1,50 @@
+<div class="RightSideMain">
+  <div class="results-header">
+    <h3>{{ HotelValues?.length || 0 }} hotels found</h3>
+
+    <div class="sort-container">
+      <label for="sort">Sort by:</label>
+      <select id="sort"  [(ngModel)]="selectedSort" (change)="onSortChange()">
+        <option value="recommended" >Recommended</option>
+        <option value="lowToHigh">Price (low to high)</option>
+        <option value="highToLow">Price(high to low)</option>
+      </select>
+    </div>
+  </div>
+  
+
+
+
+  <div class="results-list">
+    <div class="hotel-card" *ngFor="let hotel of HotelValues">
+      <div class="image-container">
+        <img
+          [src]="getImageUrl(hotel.path)"
+          alt="Hotel image"
+        />
+      </div>
+
+      <div class="content">
+        <div class="content-left">
+          <h4>{{ hotel?.name }}</h4>
+          <p class="location">{{ hotel?.city }}</p>
+        </div>
+
+        <div class="content-right">
+          <div>
+            <span class="score">8.9</span>
+            <p class="score-label">Excellent</p>
+          </div>
+
+          <div>
+            <p class="price">${{ hotel?.lowestPrice }}</p>
+            <p class="price-label">per night</p>
+            <button class="details-btn" (click)="openHotelDetails(hotel.id)">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

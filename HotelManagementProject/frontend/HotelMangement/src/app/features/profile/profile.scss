@@ -1,0 +1,21 @@
+.profile-card {
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.profile-avatar {
+  background-color: #1976d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.profile-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1rem 0;
+  font-size: 1rem;
+  color: #444;
+}

@@ -1,0 +1,70 @@
+
+
+<button class="primary" (click)="OnAddEmployee()">Add Employee</button>
+
+
+<div class="room-form" *ngIf="showForm">
+    <h3>{{ isEditMode ? 'Edit Employee Type' : 'Add Employee Type' }}</h3>
+
+    <form (ngSubmit)="onSubmit()">
+      <label>
+        Full Name:
+        <input type="text" [(ngModel)]="formData.fullName" name="fullName" required />
+      </label>
+
+      <label>
+        Role:
+        <textarea [(ngModel)]="formData.role" name="role" rows="3"></textarea>
+      </label>
+
+      <label>
+        Email:
+        <input type="text" [(ngModel)]="formData.email" name="email" required />
+      </label>
+
+      <label>
+        Password:
+        <input type="text" [(ngModel)]="formData.password" name="password" required />
+      </label>
+
+      <button   class="primary" type="submit">{{ isEditMode ? 'Update' : 'Add' }}</button>
+      <button  class="primary" type="button" (click)="onCancel()">Cancel</button>
+    </form>
+</div>
+<div class="TableContainer">
+    <table>
+        <th>
+            fullName
+        </th>
+        <th>
+            HotelId
+        </th>
+        <th>
+            Role
+        </th>
+        <th>
+            email
+        </th>
+        <th>
+            password
+        </th>
+        <th>
+            Action
+        </th>
+
+        <tr *ngFor="let employee of employeeList">
+            <td>{{employee.fullName}}</td>
+            <td>{{employee.hotelId}}</td>
+              <td>{{employee.role}}</td>
+            <td>{{employee.email}}</td>
+              <td>{{employee.password}}</td>
+            <td><button class="primary" (click)="onEdit(employee)">Edit</button>
+                <button class="primary" (click)="OnDeleteEmployee(employee.id)">delete</button>
+            </td>
+        </tr>
+    </table>
+    
+  <ng-template #noEmployee>
+    <p>No Employee found for this hotel.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,76 @@
+<div class="payments-page">
+  <header class="topbar">
+    <div>
+      <h1>All Payments</h1>
+      <p class="subtitle">Recent transactions and payment details</p>
+    </div>
+
+
+  </header>
+
+  <main class="content">
+    <section class="table-card" aria-live="polite">
+      <div *ngIf="loading" class="loader">Loading payments…</div>
+      <div *ngIf="error" class="error" role="status">{{ error }}</div>
+
+      <table *ngIf="!loading && filtered && filtered.length" class="payments-table" aria-describedby="payments-desc">
+        <caption id="payments-desc" class="sr-only">List of payment transactions</caption>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Method</th>
+            <th>Payment Date</th>
+            <th>Razorpay Order</th>
+            <th>Razorpay Payment</th>
+            <th>BookingId</th>
+            <th class="actions-col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of filtered">
+            <td class="mono">{{ p.id }}</td>
+            <td class="amount">₹{{ p.amount }}</td>
+            <td>{{ methodLabel(p.method) }}</td>
+            <td class="muted">{{ prettyDate(p.paymentDate) }}</td>
+            <td class="mono ell">{{ p.razorpayOrderId || '-' }}</td>
+            <td class="mono ell">{{ p.razorpayPaymentId || '-' }}</td>
+            <td>{{ p.bookingId ?? '-' }}</td>
+            <td class="actions-col">
+              <button class="link" (click)="selectPayment(p)" aria-label="View payment {{p.id}}">View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="!loading && filtered && filtered.length === 0" class="empty" role="status">
+        No payments found
+      </div>
+    </section>
+
+    <aside class="detail-drawer" [class.open]="selected" aria-hidden="{{!selected}}">
+      <div *ngIf="selected" class="drawer-inner">
+        <div class="drawer-head">
+          <h2>Payment #{{ selected.id }}</h2>
+          <button class="close" (click)="clearSelection()" aria-label="Close details">×</button>
+        </div>
+
+        <div class="drawer-body">
+          <dl>
+            <div class="row"><dt>Amount</dt><dd>₹{{ selected.amount }}</dd></div>
+            <div class="row"><dt>Method</dt><dd>{{ methodLabel(selected.method) }}</dd></div>
+            <div class="row"><dt>Payment Date</dt><dd>{{ prettyDate(selected.paymentDate) }}</dd></div>
+            <div class="row"><dt>Razorpay Order</dt><dd class="mono">{{ selected.razorpayOrderId || '-' }}</dd></div>
+            <div class="row"><dt>Razorpay Payment</dt><dd class="mono">{{ selected.razorpayPaymentId || '-' }}</dd></div>
+            <div class="row"><dt>Booking</dt><dd>{{ selected.bookingId ?? '—' }}</dd></div>
+            <div class="row"><dt>Raw</dt><dd class="muted small mono">{{ selected | json }}</dd></div>
+          </dl>
+        </div>
+
+        <div class="drawer-foot">
+          <button class="btn ghost" (click)="clearSelection()">Close</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+</div>

@@ -1,0 +1,10 @@
+<div class="ParentContainer">
+  <h3 class="TextDetails">Popular Destinations</h3>
+
+  <div class="gridContainer">
+    <div class="destinationCard" *ngFor="let location of loactionsDeatils">
+      <img class="destinationCardimg" [src]="location.image" [alt]="location.alt">
+      <p class="FooterText">{{ location.text }}</p>
+    </div>
+  </div>
+</div>

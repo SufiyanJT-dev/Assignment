@@ -1,0 +1,44 @@
+<nav class="admin-navbar" role="navigation" aria-label="Admin navigation">
+  <div class="nav-left">
+    <button class="menu-toggle" aria-expanded="{{isMenuOpen}}" aria-label="Toggle menu" (click)="toggleMenu()">
+     
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <a class="brand" (click)="navigate('/admin')" role="link" aria-label="Go to admin dashboard">
+      <span class="brand-logo">HB</span>
+      <span class="brand-text">Hotel Admin</span>
+    </a>
+  </div>
+
+  <div class="nav-center">
+    <ul class="nav-links" [class.open]="isMenuOpen">
+      <li><a (click)="navigate('/Admin-DashBoard/hotel')">Hotel</a></li>
+
+
+      <li><a (click)="navigate('/Admin-DashBoard/customers')">Customers</a></li>
+      <li><a (click)="navigate('/Admin-DashBoard/Payments')">Payment</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-right">
+    <button class="icon-btn" title="Notifications" aria-label="Notifications" (click)="navigate('/admin/notifications')">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 18 14.158V11c0-3.07-1.64-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.64 5.36 6 7.93 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div class="profile">
+      <button class="profile-btn" aria-haspopup="true" aria-expanded="false">
+        <span class="avatar">A</span>
+        <span class="username">Admin</span>
+      </button>
+      <div class="profile-menu">
+        <button (click)="navigate('/admin/profile')">Profile</button>
+        <button (click)="onLogout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>

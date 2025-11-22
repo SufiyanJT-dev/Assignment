@@ -1,0 +1,70 @@
+
+ <app-navbar></app-navbar>
+<div class="orders-container" *ngIf="bookingList.length > 0; else noOrders">
+  <mat-card class="order-card" *ngFor="let booking of bookingList">
+    <mat-card-header>
+      <div mat-card-avatar class="order-avatar">
+        <img [src]="'https://localhost:7119' + booking.path" alt="Hotel Image" />
+      </div>
+      <mat-card-title>Booking #{{ booking.bookingId }}</mat-card-title>
+      <mat-card-subtitle>
+        Status:
+        <span [ngClass]="getStatusClass(booking.status)">
+          {{ getStatusLabel(booking.status) }}
+        </span>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-divider></mat-divider>
+
+      <div class="detail">
+        <mat-icon color="primary">hotel</mat-icon>
+        <span>{{ booking.name }}</span>
+      </div>
+
+      <div class="detail">
+        <mat-icon color="primary">location_on</mat-icon>
+        <span>{{ booking.address }}</span>
+      </div>
+
+      <div class="detail">
+        <mat-icon color="primary">phone</mat-icon>
+        <span>{{ booking.phoneNumber }}</span>
+      </div>
+
+      <div class="detail">
+        <mat-icon color="primary">meeting_room</mat-icon>
+        <span>Room {{ booking.roomNumber }}</span>
+      </div>
+
+      <div class="detail">
+        <mat-icon color="primary">attach_money</mat-icon>
+        <span>₹{{ booking.pricePerNight }} per night</span>
+      </div>
+
+      <div class="dates">
+        <div class="detail">
+          <mat-icon color="primary">event</mat-icon>
+          <span>Check-In: {{ booking.checkInDate | date:'mediumDate' }}</span>
+        </div>
+        <div class="detail">
+          <mat-icon color="primary">event_busy</mat-icon>
+          <span>Check-Out: {{ booking.checkOutDate | date:'mediumDate' }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+     
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<ng-template #noOrders>
+  <div class="empty-state">
+    <mat-icon>assignment</mat-icon>
+    <p>No bookings yet.</p>
+    <button mat-stroked-button color="primary" routerLink="/search">Start Booking</button>
+  </div>
+</ng-template>

@@ -1,0 +1,54 @@
+.ParentContainer {
+  text-align: center;
+  padding: 20px;
+}
+
+.TextDetails {
+  font-size: 28px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.destinationCard {
+  max-width: 250px;
+  text-align: center;
+}
+
+.destinationCard img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.FooterText {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight:600;
+  color: #333;
+}
+.destinationCard {
+  max-width: 250px;
+  text-align: center;
+  overflow: hidden;           /* important! hides zoom overflow */
+  border-radius: 10px;        /* matches image corners */
+}
+
+.destinationCard img {
+
+  object-fit: cover;
+border-radius: 10px; 
+  transition: transform 0.5s ease-in-out; /* smooth animation */
+}
+
+.destinationCard img:hover {
+  transform: scale(1.1);
+        border-radius: 10px;     /* zooms only the image */
+}

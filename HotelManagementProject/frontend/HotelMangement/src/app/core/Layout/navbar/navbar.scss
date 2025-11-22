@@ -1,0 +1,59 @@
+.NavBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  border-bottom: 2px solid #ccc;
+  height: 60px;
+  width: 100%;
+  box-sizing: border-box;
+  
+}
+
+.RightSide {
+  display: flex;
+  align-items: center;
+ 
+}
+.imagecontainer{
+    
+    margin-left: 6px;
+}
+.staycontainer {
+  display: flex;
+  align-items: center;
+  
+  color: rgb(37 99 235);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.HotelImgIcon {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.Lighttext {
+  font-size: 24px;
+  font-weight: 400;
+  color: rgb(37 99 235);
+}
+
+.ButtonRight {
+  background-color: #ffffff;
+  color: rgb(37 99 235);
+  border: 2px solid rgb(37 99 235);
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ButtonRight:hover {
+  background-color: #0056b3;
+  color: white;
+}

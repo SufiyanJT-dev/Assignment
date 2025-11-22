@@ -1,0 +1,56 @@
+
+
+  <div class="PageWrapper">
+    <div class="MainContainer">
+      <div class="SearchContainer">
+        <h3>Your Search</h3>
+       <div class="locationContainer">
+  <label class="text-xs text-gray-500" for="Location">Destination</label>
+
+  <!-- Toggle between view and input -->
+  <p *ngIf="!isEditing" class="font-medium">{{ Search.location}}</p>
+  <input *ngIf="isEditing" type="text" [(ngModel)]="Search.location" class="font-medium border rounded p-1" />
+
+  <div class="dateRow">
+    <div class="dateItem">
+      <label class="text-xs text-gray-500">Check-in</label>
+      <p *ngIf="!isEditing" class="font-medium">{{ Search.checkInDate }}</p>
+      <input *ngIf="isEditing" type="date" [(ngModel)]="Search.checkInDate" class="font-medium border rounded p-1" />
+    </div>
+    <div class="dateItem">
+      <label class="text-xs text-gray-500">Check-out</label>
+      <p *ngIf="!isEditing" class="font-medium">{{ Search.checkOutDate }}</p>
+      <input *ngIf="isEditing" type="date" [(ngModel)]="Search.checkOutDate" class="font-medium border rounded p-1" />
+    </div>
+  </div>
+
+  <button class="changeSearchBtn" (click)="toggleEdit()">
+    {{ isEditing ? 'Cancel' : 'Change Search' }}
+  </button>
+
+  <!-- Optional: apply button -->
+  <button *ngIf="isEditing" class="Apply" (click)="applyChanges()">Apply</button>
+</div>
+
+        
+      </div>
+      <div class="filterContainer">
+      <h3>Filter By</h3>
+      <div class="PriceFilter">
+        <h4 class="font-medium mb-2">Price Range</h4>
+        <input type="range" class="w-full" min="50" max="1000000" value="500" [(ngModel)]="priceFilter"
+    (input)="onPriceChange()"/>
+        <div class="priceLabels">
+          <span>$500</span>
+          <span>$10000+</span>
+        </div>
+      </div>
+    </div>
+    <button class="Apply" (click)="OnApplyFilter()">Apply Filters</button>
+    <div>
+        
+
+    </div>
+    </div>
+  </div>
+

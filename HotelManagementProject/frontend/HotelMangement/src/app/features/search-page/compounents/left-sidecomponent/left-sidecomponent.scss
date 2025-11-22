@@ -1,0 +1,119 @@
+
+
+.PageWrapper {
+position: relative;
+  gap: 2rem;
+  height: 96vh;
+  align-items: flex-start;
+}
+
+
+.MainContainer {
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.SearchContainer {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.SearchContainer h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.locationContainer label {
+  display: block;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.locationContainer p.font-medium {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.dateRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.dateItem {
+  flex: 1;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.changeSearchBtn {
+  width: 100%;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #2563eb;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.changeSearchBtn:hover {
+  color: #1d4ed8;
+}
+
+
+.filterContainer {
+  width: 100%;
+  
+  
+  border-radius: 8px;
+  padding: 1rem;
+  
+}
+
+.filterContainer h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.PriceFilter h4 {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.PriceFilter input[type="range"] {
+  width: 100%;
+}
+.Apply{
+    width: 100%;
+    background-color: rgb(37 99 235 );
+    border-color: transparent;
+    border-radius: 2px;
+    color: white;
+    padding: 2%;
+    font-weight: 600;
+}
+.priceLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}

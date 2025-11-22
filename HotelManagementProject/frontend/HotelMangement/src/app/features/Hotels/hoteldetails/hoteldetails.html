@@ -1,0 +1,68 @@
+
+
+
+<app-navbar></app-navbar>
+   
+    <nav class="breadcrumbs">
+      <a href="/">Home</a> &gt;
+      <a href="">{{selectedHotelDetails.city}}</a> &gt;
+      <span>{{selectedHotelDetails.name}}</span>
+    </nav>
+
+    <!-- Gallery -->
+    <section class="gallery">
+      <div class="gallery-grid">
+        <div class="main-img">
+          <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/61c457d9b7-b89f13f8ac96b7b8d107.png" />
+        </div>
+
+        <div class="small-img">
+          <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a4f3085a81-b49bd0c73c8d28c50627.png" />
+        </div>
+
+        <div class="small-img">
+          <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/d0cba0a845-e14f38ea10bbccd7c64a.png" />
+        </div>
+
+        <div class="small-img">
+          <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/4e48217c1e-409ec8b5fdc11bd268c6.png" />
+        </div>
+
+        <div class="small-img overlay-img">
+          <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/00e227996a-6342711a0035f2986249.png" />
+          <div class="overlay"></div>
+        </div>
+      </div>
+    </section>
+  
+
+
+
+<section class="rooms" *ngIf="rooms.length; else noRooms">
+  <h2>Available Rooms</h2>
+
+  <div class="room-card" *ngFor="let room of rooms">
+    <div class="room-info">
+      <h3>Room #{{ room.roomNumber }}</h3>
+
+      <!-- Get the room type details -->
+      <ng-container *ngIf="getRoomTypeDetails(room.roomTypeId) as type">
+        <p>Type: {{ type.typeName }}</p>
+        <p>Capacity: {{ type.capacity }} guests</p>
+        <p>Description: {{ type.description }}</p>
+      </ng-container>
+
+      <p>Price: ₹{{ room.pricePerNight }} / night</p>
+      <p>Status: {{ room.status }}</p>
+    </div>
+
+    <div class="room-actions">
+      <button class="btn btn-primary" (click)="bookRoom(room.id)">Book</button>
+    </div>
+  </div>
+</section>
+
+
+<ng-template #noRooms>
+  <p>No rooms available for your selected dates.</p>
+</ng-template>

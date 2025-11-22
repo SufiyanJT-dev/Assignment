@@ -1,0 +1,17 @@
+<div class="LoginContainer">
+  <h2 class="LoginTitle">Welcome Back</h2>
+  <p>{{errorMessage}}</p>
+ <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" name="email" ngModel placeholder="Enter your email" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password" ngModel placeholder="Enter your password" required>
+  </div>
+  
+  <button type="submit" class="LoginFormbutton">Login</button>
+</form>
+
+</div>

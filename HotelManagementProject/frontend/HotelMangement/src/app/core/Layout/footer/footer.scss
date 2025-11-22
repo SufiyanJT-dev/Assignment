@@ -1,0 +1,45 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.PageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+router-outlet {
+  flex: 1;
+}
+
+.footerDiv {
+  background-color: rgb(243, 244, 246);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+p {
+  color: rgb(107, 114, 128);
+  margin: 0;
+}
+
+.RightSideContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgb(107, 114, 128);
+}
+
+.RightSideContainer a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+}
+
+.RightSideContainer a:hover {
+  color: rgb(57, 120, 221);
+}

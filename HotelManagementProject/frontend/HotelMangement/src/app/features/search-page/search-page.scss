@@ -1,0 +1,25 @@
+.page-layout {
+  display: flex;
+  gap: 2rem;
+ overflow-y:hidden;
+  align-items: flex-start;
+  max-height: 92vh;
+}
+
+.left-column {
+  width: 30%;
+  display: flex;
+  margin-top: 2%;
+  flex-direction: column;
+  
+}
+
+
+.right-column {
+  width: 70%;
+margin-top: 2%;
+  display: flex;
+  margin-right: 2%;
+  flex-direction: column;
+  gap: 1.5rem;
+}

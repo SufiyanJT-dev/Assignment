@@ -1,0 +1,58 @@
+<div class="room-type-container">
+  <h2>Room Types Management</h2>
+
+  <button class="add-room-btn" (click)="onAddRoomType()">+ Add Room Type</button>
+
+  <div class="room-form" *ngIf="showForm">
+    <h3>{{ isEditMode ? 'Edit Room Type' : 'Add Room Type' }}</h3>
+    
+    <form (ngSubmit)="onSubmit()">
+      <label>
+        Type Name:
+        <input type="text" [(ngModel)]="formData.typeName" name="typeName" required />
+      </label>
+
+      <label>
+        Description:
+        <textarea [(ngModel)]="formData.description" name="description" rows="3"></textarea>
+      </label>
+
+      <label>
+        Capacity (Guests):
+        <input type="number" [(ngModel)]="formData.capacity" name="capacity" required min="1" />
+      </label>
+
+      <button type="submit" class="submit-btn">
+        {{ isEditMode ? 'Update Type' : 'Add Type' }}
+      </button>
+      <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
+    </form>
+  </div>
+
+  <table class="room-type-table" *ngIf="roomTypes && roomTypes.length > 0; else noRoomTypes">
+    <thead>
+      <tr>
+        <th>Type Name</th>
+        <th>Description</th>
+        <th>Capacity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rt of roomTypes">
+        <td>{{ rt.typeName }}</td>
+        <td>{{ rt.description }}</td>
+        <td>{{ rt.capacity }}</td>
+        <td>
+          <button class="action-btn edit" (click)="onEditRoomType(rt)">Edit</button>
+          <button class="action-btn delete" (click)="onDeleteRoomType(rt.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noRoomTypes>
+    <p>No room types found. Click '+ Add Room Type' to create one.</p>
+  </ng-template>
+  
+</div>

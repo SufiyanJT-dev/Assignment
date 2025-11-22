@@ -1,0 +1,168 @@
+.rooms-container {
+  padding: 20px;
+  background: #f5f7fa;
+  min-height: 100vh;
+
+  h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+
+  .add-room-btn {
+    background: #4caf50;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+    &:hover {
+      background: #43a047;
+    }
+  }
+
+  .rooms-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+
+    thead {
+      tr {
+        th {
+          text-align: left;
+          padding: 12px;
+          background: #ecf0f1;
+          color: #34495e;
+          font-weight: 600;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        background: #fff;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+
+        td {
+          padding: 12px;
+          border-top: 1px solid #f0f0f0;
+        }
+
+        &:hover {
+          transform: translateY(-2px);
+          transition: 0.2s ease;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+      }
+    }
+  }
+
+  .action-btn {
+    padding: 6px 12px;
+    margin-right: 6px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+    &.edit {
+      background: #3498db;
+      color: white;
+
+      &:hover {
+        background: #2980b9;
+      }
+    }
+
+    &.delete {
+      background: #e74c3c;
+      color: white;
+
+      &:hover {
+        background: #c0392b;
+      }
+    }
+
+    &.booking {
+      background: #f39c12;
+      color: white;
+
+      &:hover {
+        background: #d68910;
+      }
+    }
+  }
+
+  .room-form {
+    margin-top: 25px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+
+    h3 {
+      margin-bottom: 15px;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
+        color: #34495e;
+
+        input, select {
+          margin-top: 6px;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-size: 14px;
+        }
+      }
+
+      .submit-btn {
+        background: #4caf50;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+        &:hover {
+          background: #43a047;
+        }
+      }
+
+      .cancel-btn {
+        background: #e74c3c;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+        &:hover {
+          background: #c0392b;
+        }
+      }
+    }
+  }
+}

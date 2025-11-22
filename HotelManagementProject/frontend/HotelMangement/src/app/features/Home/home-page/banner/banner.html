@@ -1,0 +1,70 @@
+<div class="Maincontainer">
+  <div class="InnerContainer">
+    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/373a85be7e-505833d100ea28812cf1.png" class="imgclass" alt="Hotel background">
+    <div class="overlay"></div>
+
+    <div class="formcontainer">
+      <form #searchForm="ngForm" (ngSubmit)="onSearch(searchForm)">
+  <div class="input-row">
+    <!-- Destination -->
+    <div class="input-group">
+      <label for="location">Destination</label>
+      <input
+        type="text"
+        id="location"
+        name="location"
+        ngModel
+        required
+        placeholder="Location"
+        #location="ngModel"
+      />
+      <div class="error-message" *ngIf="location.invalid && location.touched">
+        Destination is required.
+      </div>
+    </div>
+
+    <!-- Check In -->
+    <div class="input-group">
+      <label for="checkInDate">Check In</label>
+      <input
+        type="date"
+        id="checkInDate"
+        name="checkInDate"
+        [(ngModel)]="todaydate"
+        required
+        #checkInDate="ngModel"
+      />
+      <div class="error-message" *ngIf="checkInDate.invalid && checkInDate.touched">
+        Check‑In date is required.
+      </div>
+    </div>
+
+    <!-- Check Out -->
+    <div class="input-group">
+      <label for="checkOutDate">Check Out</label>
+      <input
+        type="date"
+        id="checkOutDate"
+        name="checkOutDate"
+        [(ngModel)]="tomorrow"
+        required
+        #checkOutDate="ngModel"
+      />
+      <div class="error-message" *ngIf="checkOutDate.invalid && checkOutDate.touched">
+        Check‑Out date is required.
+      </div>
+      <div class="error-message" *ngIf="checkOutDate.touched && checkOutDate.value <= checkInDate.value">
+        Check‑Out must be later than Check‑In.
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="ButtonMiddle" [disabled]="searchForm.invalid">
+    Search
+  </button>
+</form>
+
+
+    </div>
+  </div>
+</div>
